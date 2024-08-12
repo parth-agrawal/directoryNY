@@ -3,7 +3,9 @@ import { getAuth } from "firebase/auth";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import SignInButton from "./Test";
+import Test from "./Test";
+// import SignInButton from "./Test";
+// import UserComponent from "./UserComponent";
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -21,18 +23,17 @@ const firebaseConfig = {
 export default function App(
 ) {
   const app = initializeApp(firebaseConfig);
-
   const auth = getAuth();
   auth.languageCode = 'it';
   console.log(auth)
   console.log(app)
 
-
   return (
     <header>
 
-        <UserComponent />
-   
+      {/* <UserComponent /> */}
+      <Test />
+
     </header>
   );
 }

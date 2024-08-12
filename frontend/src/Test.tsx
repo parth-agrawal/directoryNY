@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import firebaseApp from './firebase';
-import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged } from "firebase/auth";
 
 interface ReloadUserInfo {
     screenName: string;
