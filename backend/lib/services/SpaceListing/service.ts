@@ -22,11 +22,10 @@ export const SpaceListingService = (): ISpaceListingService => ({
         return spaceListing
     },
     updateSpaceListing: async ({ updatedSpaceListing }) => {
+        const { id, ...updateData } = updatedSpaceListing;
         const spaceListing = await prisma.spaceListing.update({
-            where: {
-                id: updatedSpaceListing.id
-            },
-            data: updatedSpaceListing
+            where: { id },
+            data: updateData
         })
         return spaceListing
     },

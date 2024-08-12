@@ -27,10 +27,12 @@ export default function App(
   console.log(auth)
   console.log(app)
 
+
   return (
     <header>
-      <h1>Hello World</h1>
-      <SignInButton />
+
+        <UserComponent />
+   
     </header>
-  )
+  );
 }

@@ -2,8 +2,8 @@
 
 import express from "express";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
-import client from "../../../prisma/client.ts";
-
+import prisma from "../../../prisma/client.ts";
+import { UserService } from "../../services/User/service.ts";
 
 const router = express.Router();
 const clerkAuth = ClerkExpressRequireAuth();
@@ -20,23 +20,52 @@ router.get("/users", clerkAuth, async (req, res) => {
   }
 });
 
-router.post("/users", clerkAuth, async (req, res) => {
+// router.post("/users", clerkAuth, async (req, res) => {
+//   try {
+//     const user = await client.user.upsert({
+//       where: { clerkId: req.auth.userId },
+//       update: {
+//         email: req.body.email,
+//         name: req.body.name,
+//       },
+//       create: {
+//         clerkId: req.auth.userId,
+//         email: req.body.email,
+//         name: req.body.name,
+//       },
+//     });
+//     res.json(user);
+//   } catch (error) {
+//     console.error("Error creating/updating user:", error);
+//     res.status(500).json({ error: "Internal server error" });
+//   }
+// });
+
+router.get('/users/all', async (req, res) => {
   try {
-    const user = await client.user.upsert({
-      where: { clerkId: req.auth.userId },
-      update: {
-        email: req.body.email,
-        name: req.body.name,
-      },
-      create: {
-        clerkId: req.auth.userId,
-        email: req.body.email,
-        name: req.body.name,
-      },
-    });
+    const users = await UserService().getAllUsers();
+    res.json(users);
+  } catch (error) {
+    console.error("Error getting users:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+})
+router.get('/users/:userId', async (req, res) => {
+  try {
+    const user = await UserService().getUserById({ userId: req.params.userId });
     res.json(user);
   } catch (error) {
-    console.error("Error creating/updating user:", error);
+    console.error("Error getting user:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
+
+router.post('/users/new', async (req, res) => {
+  try {
+    const user = await UserService().createUser({ newUser: req.body });
+    res.json(user);
+  } catch (error) {
+    console.error("Error creating user:", error);
     res.status(500).json({ error: "Internal server error" });
   }
 });
