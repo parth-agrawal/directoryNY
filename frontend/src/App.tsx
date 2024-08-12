@@ -29,12 +29,6 @@ export default function App(
 
   return (
     <header>
-      {/* <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn> */}
       <h1>Hello World</h1>
       <SignInButton />
     </header>
