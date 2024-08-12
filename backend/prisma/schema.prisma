@@ -24,8 +24,8 @@ model User {
   // fields
   name           String
   clerkId        String         @unique
-  referredId     String
-  referredByUser User           @relation("Referrals", fields: [referredId], references: [id])
+  referredId     String?
+  referredByUser User?          @relation("Referrals", fields: [referredId], references: [id])
   Listing        SpaceListing[]
   ReferredUsers  User[]         @relation("Referrals")
   UserListing    UserListing[]
