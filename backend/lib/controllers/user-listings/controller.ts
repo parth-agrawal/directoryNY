@@ -56,3 +56,5 @@ router.delete("/:userListingId", async (req, res) => {
         res.status(404).json({ error: "No user listing deleted" });
     }
 });
+
+export default router;  

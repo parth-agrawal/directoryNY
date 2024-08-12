@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import userRouter from "./lib/controllers/users/controller";
 import spaceListingsRouter from "./lib/controllers/space-listings/controller";
+import userListingsRouter from "./lib/controllers/user-listings/controller";
 
 const app = express();
 
@@ -16,6 +17,7 @@ app.use(express.json());
 
 app.use("/api", userRouter);
 app.use('/api/space-listings', spaceListingsRouter);
+app.use('/api/user-listings', userListingsRouter);
 
 
 app.get("/", (req, res) => {
