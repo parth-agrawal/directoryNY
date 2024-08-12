@@ -4,9 +4,9 @@ export const EP = {
   listings: {
     createListing: "/listing",
     getAllListings: "/listings",
-    getListingByUserId: (userId: string) => `/listings/user/${userId}`,
-    getListingById: (listingId: string) => `/listings/${listingId}`,
-    updateListing: (listingId: string) => `/listings/update/${listingId}`,
+    getListingByUserId: (userId: string) => `/space-listings/user/${userId}`,
+    getListingById: (listingId: string) => `/space-listings/${listingId}`,
+    updateListing: (listingId: string) => `/space-listings/update/${listingId}`,
     deleteListing: (listingId: string) => `/listings/delete/${listingId}`
   }
 }
