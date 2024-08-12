@@ -2,7 +2,7 @@ import { IUserListingService } from "./interface";
 import type { UserListing } from "@prisma/client";
 import prisma from '../../../prisma/client'
 
-export const userListingService: IUserListingService = ({
+export const UserListingService = (): IUserListingService => ({
     getUserListingById: async ({ userListingId }) => {
         const userListing = await prisma.userListing.findUnique({
             where: {
