@@ -1,8 +1,9 @@
 import { UserListing } from "@prisma/client"
 
-interface IUserListingService {
-    getUserListing({ userListingId }: { userListingId: string }):
-        Promise<UserListing>
+export interface IUserListingService {
+    getUserListingById({ userListingId }: { userListingId: string }):
+        Promise<UserListing | null>
+    getAllUserListings(): Promise<UserListing[]>
     createUserListing({ newUserListing }: { newUserListing: UserListing }):
         Promise<UserListing>
     updateUserListing({ updatedUserListing }: {

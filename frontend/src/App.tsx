@@ -4,6 +4,7 @@ import {
   SignInButton,
   UserButton,
 } from "@clerk/clerk-react";
+import { SpaceListingCard } from "./components/compound/SpaceListingCard";
 
 function UserComponent() {
   return (
@@ -67,22 +68,21 @@ function UserComponent() {
 export default function App() {
   return (
     <header>
-      <SignedOut>
-        <SignInButton />
-      </SignedOut>
-      <SignedIn>
-        <UserButton />
-      </SignedIn>
-      <div className="flex flex-row bg-[#FEFBEB]">
-        <button className="no-underline rounded-md py-1.5 px-3 text-[#474747] border border-[#cccccc]  hover:bg-[#f1efdf]">
-          People
-        </button>
-        <button className="no-underline rounded-md py-1.5 px-3 font-bold text-[#1d462f] border-2 hover:border-[#1d462f] bg-transparent hover:bg-[#e7e9d8]">
-          Rooms
-        </button>
+      <div className="flex flex-col">
 
+        <div className="flex flex-row bg-[#FEFBEB]">
+          <button className="no-underline rounded-md py-1.5 px-3 text-[#474747] border border-[#cccccc]  hover:bg-[#f1efdf]">
+            People
+          </button>
+          <button className="no-underline rounded-md py-1.5 px-3 font-bold text-[#1d462f] border-2 hover:border-[#1d462f] bg-transparent hover:bg-[#e7e9d8]">
+            Rooms
+          </button>
+
+        </div>
         <UserComponent />
+        <SpaceListingCard />
       </div>
+
     </header>
   );
 }
