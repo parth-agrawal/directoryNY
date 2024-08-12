@@ -11,8 +11,11 @@ const SignInButton = () => {
             .then(async (result) => {
                 // This gives you a the Twitter OAuth 1.0 Access Token and Secret.
                 // You can use these server side with your app's credentials to access the Twitter API.
-                const credential = TwitterAuthProvider.credentialFromResult(result);
-                const token = credential.accessToken;
+                // const credential = TwitterAuthProvider.credentialFromResult(result);
+                // console.log('hello credential', credential)
+                console.log('hello result', result)
+
+                const token = result.user.accessToken;
                 // console.log('hello token', token)
                 // const secret = credential.secret;
                 // fetch user data
