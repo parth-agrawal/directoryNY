@@ -1,4 +1,5 @@
 import { ISpaceListingService } from "./interface";
+import type { SpaceListing } from "@prisma/client";
 import prisma from '../../../prisma/client'
 
 export const SpaceListingService = (): ISpaceListingService => ({
@@ -14,7 +15,7 @@ export const SpaceListingService = (): ISpaceListingService => ({
         const spaceListings = await prisma.spaceListing.findMany()
         return spaceListings
     },
-    createSpaceListing: async ({ newSpaceListing }) => {
+    createSpaceListing: async ({ newSpaceListing }: { newSpaceListing: Omit<SpaceListing, 'id'> }) => {
         const spaceListing = await prisma.spaceListing.create({
             data: newSpaceListing
         })
