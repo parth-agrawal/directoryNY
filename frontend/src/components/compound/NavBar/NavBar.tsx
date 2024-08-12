@@ -3,9 +3,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from "./UserDropdown";
 import HousingForm from '../../base/HousingForm';
+import Referral from '../../base/Referral';
 
 export default function NavBar() {
   const [showHousingForm, setShowHousingForm] = useState(false);
+  const [showReferralForm, setShowReferralForm] = useState(false);
 
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white">
@@ -23,7 +25,10 @@ export default function NavBar() {
             <FontAwesomeIcon icon={faHouse} className="mr-2" />
             Help Me find housing
           </button>
-          <button className="px-4 py-2 bg-black text-white rounded-full hover:bg-green-600">
+          <button
+            className="px-4 py-2 bg-black text-white rounded-full hover:bg-green-600"
+            onClick={() => setShowReferralForm(true)}
+          >
             <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
             Invite a friend
           </button>
@@ -41,6 +46,9 @@ export default function NavBar() {
       </div>
       {showHousingForm && (
         <HousingForm onClose={() => setShowHousingForm(false)} />
+      )}
+      {showReferralForm && (
+        <Referral onClose={() => setShowReferralForm(false)} />
       )}
     </nav>
   );
