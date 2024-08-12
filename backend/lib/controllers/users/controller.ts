@@ -2,7 +2,8 @@
 
 import express from "express";
 import { ClerkExpressRequireAuth } from "@clerk/clerk-sdk-node";
-import client from "../../../utils/client.ts";
+import client from "../../../prisma/client.ts";
+
 
 const router = express.Router();
 const clerkAuth = ClerkExpressRequireAuth();

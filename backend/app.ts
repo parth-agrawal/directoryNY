@@ -2,6 +2,8 @@ import express, { NextFunction, Response, Request } from "express";
 import cors from "cors";
 import userRouter from "./lib/controllers/users/controller";
 import auth from "./middleware/auth";
+import spaceListingsRouter from "./lib/controllers/space-listings/controller";
+
 const app = express();
 import bodyParser from "body-parser";
 
@@ -32,15 +34,18 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 // app.use(requireAuth);
 
 app.use("/api", userRouter);
+
+app.use('/api/space-listings', spaceListingsRouter);
+
+
 app.get("/", (req, res) => {
-  res.send("Hello World");
-});
-app.get("/test", requireAuth, (req, res) => {
-  res.send("Hello World test");
+	res.send("Hello World!");
 });
 
-app.post("/test", requireAuth, (req, res) => {
-  res.send("Hello World test");
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, () => {
+	console.log(`Server is running on http://localhost:${PORT}`);
 });
 
 export default app;
