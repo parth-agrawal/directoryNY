@@ -2,12 +2,12 @@ import axios from "axios";
 
 export const EP = {
   listings: {
-    createListing: "/listing",
-    getAllListings: "/listings",
-    getListingByUserId: (userId: string) => `/space-listings/user/${userId}`,
+    createListing: "/space-listings/create",
+    getAllListings: "/space-listings/all",
+    getListingByUserId: (userId: string) => `/space-listings/${userId}`,
     getListingById: (listingId: string) => `/space-listings/${listingId}`,
-    updateListing: (listingId: string) => `/space-listings/update/${listingId}`,
-    deleteListing: (listingId: string) => `/listings/delete/${listingId}`
+    updateListing: (listingId: string) => `/space-listings/${listingId}`,
+    deleteListing: (listingId: string) => `/space-listings/${listingId}`
   }
 }
 
