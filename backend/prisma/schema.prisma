@@ -48,7 +48,7 @@ model UserListing {
   @@map("userlisting")
 }
 
-model PropertyListing {
+model SpaceListing {
   id          String  @id @default(cuid())
   user_id     String
   User        User    @relation(fields: [user_id], references: [id])
