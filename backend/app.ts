@@ -3,6 +3,7 @@ import cors from "cors";
 import userRouter from "./lib/controllers/users/controller";
 import auth from "./middleware/auth";
 import spaceListingsRouter from "./lib/controllers/space-listings/controller";
+import userListingsRouter from "./lib/controllers/user-listings/controller";
 
 const app = express();
 app.use(
@@ -29,7 +30,10 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 app.use(requireAuth);
 
 app.use("/api", userRouter);
-app.use("/api/space-listings", spaceListingsRouter);
+
+app.use('/api/space-listings', spaceListingsRouter);
+app.use('/api/user-listings', userListingsRouter);
+
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
