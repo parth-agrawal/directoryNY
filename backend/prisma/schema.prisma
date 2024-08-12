@@ -18,19 +18,34 @@ datasource db {
 // user
 model User {
   // metadata
-  id         String    @id @default(cuid())
-  createdAt  DateTime  @default(now())
-  updatedAt  DateTime  @default(now()) @updatedAt
+  id             String            @id @default(cuid())
+  createdAt      DateTime          @default(now())
+  updatedAt      DateTime          @default(now()) @updatedAt
   // fields
-  name       String
-  clerkId    String    @unique
-  referredBy String
-  Listing    Listing[]
+  name           String
+  clerkId        String            @unique
+  referredId     String
+  referredByUser User              @relation("Referrals", fields: [referredId], references: [id])
+  Listing        PropertyListing[]
+  ReferredUsers  User[]            @relation("Referrals")
+  UserListing    UserListing[]
 
   @@map("user")
 }
 
-model Listing {
+model UserListing {
+  id          String  @id @default(cuid())
+  user_id     String
+  User        User    @relation(fields: [user_id], references: [id])
+  housingtype String
+  moveInTime  String
+  housemates  String
+  website     String?
+  phone       String?
+  email       String?
+}
+
+model PropertyListing {
   id          String  @id @default(cuid())
   user_id     String
   User        User    @relation(fields: [user_id], references: [id])
@@ -38,7 +53,7 @@ model Listing {
   description String
   location    String
   housemates  String
-  priceRange  Int
+  priceRange  String
   website     String?
   image       String?
   phone       String?
