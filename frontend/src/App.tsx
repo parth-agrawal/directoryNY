@@ -1,5 +1,5 @@
 
-import { SpaceListingCard } from "./components/compound/SpaceListingCard";
+import { ListSpaceArea } from "./components/compound/ListSpaceArea";
 
 import { getAuth } from "firebase/auth";
 
@@ -45,8 +45,8 @@ export default function App(
           </button>
 
         </div>
-        <UserComponent />
-        <SpaceListingCard />
+
+        <ListSpaceArea />
       </div>
 
     </header>
