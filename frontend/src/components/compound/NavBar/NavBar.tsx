@@ -1,8 +1,12 @@
+import React, { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from "./UserDropdown";
+import HousingForm from '../../base/HousingForm';
 
 export default function NavBar() {
+  const [showHousingForm, setShowHousingForm] = useState(false);
+
   return (
     <nav className="fixed top-0 left-0 right-0 bg-white">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
@@ -12,7 +16,10 @@ export default function NavBar() {
           <span className="text-xl font-bold">Directory NY</span>
         </div>
         <div className="flex items-center space-x-4">
-          <button className="px-4 py-2 bg-gray-400 text-white rounded-full hover:bg-blue-600">
+          <button
+            className="px-4 py-2 bg-gray-400 text-white rounded-full hover:bg-black"
+            onClick={() => setShowHousingForm(true)}
+          >
             <FontAwesomeIcon icon={faHouse} className="mr-2" />
             Help Me find housing
           </button>
@@ -32,6 +39,9 @@ export default function NavBar() {
           </div>
         </div>
       </div>
+      {showHousingForm && (
+        <HousingForm onClose={() => setShowHousingForm(false)} />
+      )}
     </nav>
   );
 }
