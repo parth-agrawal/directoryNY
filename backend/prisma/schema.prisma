@@ -29,6 +29,7 @@ model User {
   Listing        PropertyListing[]
   ReferredUsers  User[]            @relation("Referrals")
   UserListing    UserListing[]
+  HelpForm       HelpForm[]
 
   @@map("user")
 }
@@ -43,6 +44,8 @@ model UserListing {
   website     String?
   phone       String?
   email       String?
+
+  @@map("userlisting")
 }
 
 model PropertyListing {
@@ -58,4 +61,15 @@ model PropertyListing {
   image       String?
   phone       String?
   email       String?
+
+  @@map("propertylisting")
+}
+
+model HelpForm {
+  id       String @id @default(cuid())
+  user_id  String
+  User     User   @relation(fields: [user_id], references: [id])
+  FormData Json
+
+  @@map("helpform")
 }
