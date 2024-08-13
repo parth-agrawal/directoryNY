@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import { useUserService } from "../../lib/services/users/service"
-import { SpaceListing } from "../../lib/services/Space-Listing/types"
+import { SpaceListing, SpaceListingInput } from "../../lib/services/Space-Listing/types"
 import SpaceListingService from "../../lib/services/Space-Listing/service"
 
 export const CreateSpaceListingArea = () => {
@@ -48,9 +48,9 @@ const CreateSpaceButton = ({ clickHandler }: { clickHandler: () => void }) => {
     )
 }
 
-type SpaceListingFormData = Omit<SpaceListing, 'id'>
 
 const CreateSpaceListingForm = () => {
+    // const userService = useUserService()
 
     const [userId, setUserId] = useState<string | null>(null)
 
@@ -58,14 +58,17 @@ const CreateSpaceListingForm = () => {
 
     useEffect(() => {
         const fetchUser = async () => {
-            const user = await useUserService().getCurrentUser()
+            // const user = await userService.getCurrentUser()
+            const user = { id: '001a' } // dummy til useUser is fixed
             setUserId(user?.id || null)
+            setFormData(prevData => ({ ...prevData, user_id: user?.id || '' }))
+            console.log(user, 'here')
         }
         fetchUser()
     }, [])
 
-    const [formData, setFormData] = useState<SpaceListingFormData>({
-        user_id: userId || '',
+    const [formData, setFormData] = useState<SpaceListingInput>({
+        user_id: '',
         name: '',
         description: '',
         location: '',
@@ -83,6 +86,7 @@ const CreateSpaceListingForm = () => {
             ...prevData,
             [name]: value
         }))
+        console.log('hey formdata', formData)
     }
 
     const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {

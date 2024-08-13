@@ -11,3 +11,5 @@ export type SpaceListing = {
     phone?: string;
     email?: string;
 }
+
+export type SpaceListingInput = Omit<SpaceListing, 'id'>
