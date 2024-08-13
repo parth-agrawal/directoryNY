@@ -6,8 +6,30 @@ import { SpaceListingCreateForm } from "./SpaceListingCreateForm"
 
 export const CreateSpaceListingArea = () => {
 
+    const userService = useUserService();
+    const [userSpaceListings, setUserSpaceListings] = useState<SpaceListing[]>([]);
+
+    useEffect(() => {
+        const fetchUserSpaceListings = async () => {
+            try {
+                // const user = await userService.getCurrentUser();
+                const user = { id: 'clzrcg4850000gwwz9cj69iyr' } // dummy til useUser is fixed
+                if (user && user.id) {
+                    const response = await SpaceListingService().getAll();
+                    if (response.data && response.data.listings) {
+                        const userListings = response.data.listings.filter(listing => listing.user_id === user.id);
+                        setUserSpaceListings(userListings);
+                    }
+                }
+            } catch (error) {
+                console.error("Error fetching user space listings:", error);
+            }
+        };
+
+        fetchUserSpaceListings();
+    }, []);
+
     // const user = useUserService()
-    const [hasCreatedSpace, setHasCreatedSpace] = useState(false)
     const [createFormVisible, setCreateFormVisible] = useState(false)
     // if (user.createdSpaces.length > 0) {
     //     setHasCreatedSpace(true)
@@ -15,7 +37,6 @@ export const CreateSpaceListingArea = () => {
 
     const handleCreateSpaceClick = () => {
         setCreateFormVisible(true)
-        setHasCreatedSpace(true)
         // update user data
     }
 
@@ -30,7 +51,7 @@ export const CreateSpaceListingArea = () => {
                 <div className="text-xl ">
                     Add your space to be discovered by people looking for housing.
                 </div>
-                {hasCreatedSpace ? <EditSpaceArea /> : <CreateSpaceButton clickHandler={handleCreateSpaceClick} />}
+                {userSpaceListings.length > 0 ? <EditSpaceArea /> : <SpaceListingCreateButton clickHandler={handleCreateSpaceClick} />}
                 {createFormVisible ? <SpaceListingCreateForm /> : null}
             </div>
 
@@ -41,7 +62,7 @@ export const CreateSpaceListingArea = () => {
 }
 
 
-const CreateSpaceButton = ({ clickHandler }: { clickHandler: () => void }) => {
+const SpaceListingCreateButton = ({ clickHandler }: { clickHandler: () => void }) => {
     return (
         <button onClick={clickHandler}>
             Add your space
