@@ -59,7 +59,7 @@ const CreateSpaceListingForm = () => {
     useEffect(() => {
         const fetchUser = async () => {
             // const user = await userService.getCurrentUser()
-            const user = { id: '001a' } // dummy til useUser is fixed
+            const user = { id: 'clzrcg4850000gwwz9cj69iyr' } // dummy til useUser is fixed
             setUserId(user?.id || null)
             setFormData(prevData => ({ ...prevData, user_id: user?.id || '' }))
             console.log(user, 'here')
