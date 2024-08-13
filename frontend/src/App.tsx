@@ -1,4 +1,6 @@
 
+import NavBar from "./components/compound/NavBar/NavBar";
+
 import { SpaceListingCard } from "./components/compound/SpaceListingCard";
 
 import { getAuth } from "firebase/auth";
@@ -33,6 +35,9 @@ export default function App(
 
   return (
     <header>
+    <div>
+      <NavBar />
+    </div>
 
       <div className="flex flex-col">
 
