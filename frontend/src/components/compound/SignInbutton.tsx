@@ -50,8 +50,6 @@ const SignInButton = () => {
         }
     })
 
-    api.get('/test').then(res => console.log(res))
-
     const signOut = () => {
         auth.signOut()
     }

@@ -8,6 +8,7 @@ import "./index.css";
 import PeopleListingSection from "./components/pages/PeopleListingSection.tsx";
 import { SpaceListingPage } from "./components/pages/SpaceListingPage.tsx";
 import MainLayout from "./components/layouts/MainLayout.tsx";
+import SignInButton from "./components/compound/SignInbutton.tsx";
 
 const router = createBrowserRouter([
   {
