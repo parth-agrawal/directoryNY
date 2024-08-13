@@ -2,21 +2,22 @@ import UserListing from "../compound/UserListing";
 import { UserListingProps, UserListingType } from "../types";
 import { useState } from "react";
 
-type UserPreference = Pick<
-  UserListingType,
-  | "lease_length_preference"
-  | "lease_timing_preference"
-  | "lease_roommates_preference"
->;
+// type UserPreference = Pick<
+//   UserListingType,
+//   | "lease_length_preference"
+//   | "lease_timing_preference"
+//   | "lease_roommates_preference"
+// >;
 
 export default function PeopleListingSection() {
   const currentDate = new Date();
 
-  const [preferencefilter, setpreferenceFilter] = useState<UserPreference>({
-    lease_length_preference: "Any Lease",
-    lease_roommates_preference: "Any Count",
-    lease_timing_preference: "Any timeline",
-  });
+  const [leaselengthpreference, setLeaselengthpreference] =
+    useState("Any Lease");
+  const [leaseroommatereference, setLeaseroommatereference] =
+    useState("Any Count");
+  const [leasetimingpreference, setLeasetimingpreference] =
+    useState("Any timeline");
 
   const userlistings = [
     {
@@ -30,8 +31,9 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
+      lease_roommates_preference: "1-2 housemates",
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -50,8 +52,8 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -70,8 +72,10 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
+      lease_roommates_preference: "1-2 housemates",
+
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -90,8 +94,10 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
+      lease_roommates_preference: "1-2 housemates",
+
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -110,8 +116,10 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
+      lease_roommates_preference: "1-2 housemates",
+
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -130,8 +138,9 @@ export default function PeopleListingSection() {
         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
       description:
         "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
+      lease_length_preference: "A day",
+      lease_timing_preference: "soon",
+      lease_roommates_preference: "1-2 housemates",
       referrer_info: {
         name: "Hello",
         twitter_url: "google.com",
@@ -208,9 +217,15 @@ export default function PeopleListingSection() {
   const SelectFilter = ({
     name,
     options,
+    changeHandler,
+    selected,
+    defaultval,
   }: {
     name: string;
     options: Array<string>;
+    selected: string;
+    defaultval: string;
+    changeHandler: React.ChangeEventHandler<HTMLSelectElement>;
   }) => {
     return (
       <select
@@ -222,6 +237,9 @@ export default function PeopleListingSection() {
         dir="ltr"
         data-state="closed"
         data-placeholder=""
+        value={selected}
+        onChange={changeHandler}
+        defaultValue={defaultval}
         className="flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-[#FFFDF3] px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300"
       >
         <option disabled selected value>
@@ -264,6 +282,9 @@ export default function PeopleListingSection() {
             <SelectFilter
               name="Lease length"
               options={["1-year Lease", "Short-term Lease", "Any lease"]}
+              selected={leaselengthpreference}
+              defaultval="Any lease"
+              changeHandler={(e) => setLeaselengthpreference(e.target.value)}
             />
             <SelectFilter
               name="Housemate Count"
@@ -274,6 +295,10 @@ export default function PeopleListingSection() {
                 "12+ housemates",
                 "Any count",
               ]}
+              defaultval="Any count"
+              selected={leaseroommatereference}
+              changeHandler={(e) => setLeaseroommatereference(e.target.value)}
+              // defaultval="Any count"
             />
 
             <div
@@ -293,6 +318,10 @@ export default function PeopleListingSection() {
           <SelectFilter
             name="Moving in..."
             options={["ASAP", "<3 months", "3+ months", "Any timeline"]}
+            selected={leasetimingpreference}
+            defaultval="Any timeline"
+            changeHandler={(e) => setLeasetimingpreference(e.target.value)}
+            // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -317,7 +346,17 @@ export default function PeopleListingSection() {
                   new Date(f.post_datetime) <= frame[1] &&
                   new Date(f.post_datetime) > frame[2]
               )
-              .filter((f) => f)
+              .filter((f) => {
+                // console.log(f.lease_roommates_preference);
+                return (
+                  (leaselengthpreference === "Any lease" ||
+                    leaselengthpreference === f.lease_length_preference) &&
+                  (leaseroommatereference === "Any count" ||
+                    leaseroommatereference === f.lease_roommates_preference) &&
+                  (leasetimingpreference === "Any timeline" ||
+                    leasetimingpreference === f.lease_timing_preference)
+                );
+              })
               .map((listing) => (
                 <UserListing UserData={listing} />
               ))}
