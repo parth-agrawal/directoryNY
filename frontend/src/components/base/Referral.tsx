@@ -6,9 +6,24 @@ interface ReferralProps {
     onClose: () => void;
 }
 
+var SQLQueryCache: { [key: string]: number } = {};
+
+
+function invalidateCache(userId: string) {
+    delete SQLQueryCache[userId];
+}
+
+function getReferralCount(userId: string) {
+    if (SQLQueryCache[userId]) {
+        return SQLQueryCache[userId];
+    }
+    const count = runSQLQuery(`SELECT COUNT(*) FROM users WHERE referral_code = ${userId}`);
+    return count
+}
+
 const Referral: React.FC<ReferralProps> = ({ onClose }) => {
     const [copied, setCopied] = useState(false);
-    const referralLink = 'https://directorysf.com/?referralCode=YOURCODE';
+    const referralLink = 'https://directoryNY.com/?referralCode';
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(referralLink);
