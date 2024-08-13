@@ -4,6 +4,7 @@ import { faHouse, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from "./UserDropdown";
 import HousingForm from '../../base/HousingForm';
 import Referral from '../../base/Referral';
+import { Link } from 'react-router-dom';
 
 export default function NavBar() {
   const [showHousingForm, setShowHousingForm] = useState(false);
@@ -38,9 +39,9 @@ export default function NavBar() {
       <div className="border-t border-b border-gray-200">
         <div className="container mx-auto px-4">
           <div className="flex space-x-4 py-3">
-            <button className="px-4 py-2 text-gray-600 bg-transparent hover:text-gray-900 border-b-2 border-gray-200 hover:border-gray-900">People</button>
-            <button className="px-4 py-2 text-gray-600 bg-transparent hover:text-gray-900 border-b-2 border-gray-200 hover:border-gray-900">Rooms</button>
-            <button className="px-4 py-2 text-gray-600 bg-transparent hover:text-gray-900 border-b-2 border-gray-200 hover:border-gray-900">Map View</button>
+            <Link to="/" className="px-4 py-2 text-gray-600 bg-transparent hover:text-gray-900 border-b-2 border-gray-200 hover:border-gray-900">People</Link>
+            <Link to="/spaces" className="px-4 py-2 text-gray-600 bg-transparent hover:text-gray-900 border-b-2 border-gray-200 hover:border-gray-900">Rooms</Link>
+            <button className="px-4 py-2 text-gray-400 bg-transparent cursor-not-allowed border-b-2 border-gray-200">Map View</button>
           </div>
         </div>
       </div>
