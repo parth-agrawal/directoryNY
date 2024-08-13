@@ -1,5 +1,5 @@
 
-import { ListSpaceArea } from "./components/compound/ListSpaceArea";
+import { CreateSpaceListingArea } from "./components/compound/CreateSpaceListingArea";
 
 import { getAuth } from "firebase/auth";
 
@@ -46,7 +46,7 @@ export default function App(
 
         </div>
 
-        <ListSpaceArea />
+        <CreateSpaceListingArea />
       </div>
 
     </header>
