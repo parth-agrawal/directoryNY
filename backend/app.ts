@@ -27,7 +27,10 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 	next();
 };
 
-// app.use(requireAuth);
+// app.post('/referralCheck', (req, res) => {
+// })
+
+app.use(requireAuth);
 
 app.use("/api", userRouter);
 
