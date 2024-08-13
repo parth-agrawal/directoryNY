@@ -1,21 +1,8 @@
-import api, { EP } from "../../../../network/api";
+import api, { EP } from "../../../../network/api"
+import { SpaceListing, SpaceListingInput } from "./types"
 
-interface SpaceListingInput {
-    name: string;
-    description: string;
-    location: string;
-    housemates: string;
-    priceRange: string;
-    website?: string;
-    image?: string;
-    phone?: string;
-    email?: string;
-}
 
-export interface SpaceListing extends SpaceListingInput {
-    id: string;
-    user_id: string;
-}
+
 
 type Response<T> = Promise<{ data: T; error: string }>;
 

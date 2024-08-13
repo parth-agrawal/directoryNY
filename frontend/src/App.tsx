@@ -1,7 +1,11 @@
 
+
+import { CreateSpaceListingArea } from "./components/compound/CreateSpaceListingArea";
+
 import NavBar from "./components/compound/NavBar/NavBar";
 
 import { SpaceListingCard } from "./components/compound/SpaceListingCard";
+
 
 import { getAuth } from "firebase/auth";
 
@@ -50,8 +54,8 @@ export default function App(
           </button>
 
         </div>
-        <UserComponent />
-        <SpaceListingCard />
+
+        <CreateSpaceListingArea />
       </div>
 
     </header>
