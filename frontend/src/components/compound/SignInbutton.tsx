@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import firebaseApp from '../../firebase';
 import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged } from "firebase/auth";
+import api from '../../../network/api';
 
 interface ReloadUserInfo {
     screenName: string;
@@ -51,6 +52,9 @@ const SignInButton = () => {
     const signOut = () => {
         auth.signOut()
     }
+
+    api.get('/test')
+
 
     return (
         <>
