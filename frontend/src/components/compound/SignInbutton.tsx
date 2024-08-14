@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import firebaseApp from '../../firebase';
 import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged } from "firebase/auth";
-import api from '../../../network/api';
 
 interface ReloadUserInfo {
     screenName: string;
@@ -24,7 +23,7 @@ const SignInButton = () => {
                 console.log('hello user', user)
                 const username = user.reloadUserInfo.screenName
                 const token = user.accessToken;
-                const request = await fetch(`http://localhost:3009/test`, {
+                const request = await fetch(`http://localhost:3000/test`, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -52,9 +51,6 @@ const SignInButton = () => {
     const signOut = () => {
         auth.signOut()
     }
-
-    api.get('/test')
-
 
     return (
         <>
