@@ -1,5 +1,19 @@
 import Dropdown from "./Dropdown";
 
+// const [filterValues, setFilterValues] = useState({
+//     leaseTiming: '',
+//     housemateCount: '',
+//     movingIn: ''
+// });
+
+// const handleFilterChange = (name: string, value: string) => {
+//     setFilterValues(prev => ({ ...prev, [name]: value }));
+//     console.log(filterValues);
+// };
+
+{/* <FilterSection onFilterChange={handleFilterChange} /> */ }
+
+
 const FilterSection: React.FC<{ onFilterChange: (filter: string, value: any) => void }> = ({ onFilterChange }) => {
     return <div className="flex flex-row justify-center space-x-6 px-6 flex-wrap">
         {/* selection filters */}
