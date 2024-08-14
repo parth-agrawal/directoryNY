@@ -73,8 +73,8 @@ export default function PeopleListingSection() {
         a.post_datetime > b.post_datetime
           ? 1
           : b.post_datetime > a.post_datetime
-          ? -1
-          : 0
+            ? -1
+            : 0
       )
       .filter((f) => {
         console.log(new Date(f.post_datetime), frame);
@@ -119,7 +119,7 @@ export default function PeopleListingSection() {
         value={selected}
         onChange={changeHandler}
         defaultValue={defaultval}
-        className="flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-[#FFFDF3] px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;>span]:line-clamp-1 dark:border-neutral-800 dark:bg-neutral-950 dark:ring-offset-neutral-950 dark:placeholder:text-neutral-400 dark:focus:ring-neutral-300"
+        className="flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-[#FFFDF3] px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;>span]:line-clamp-1  "
       >
         <option disabled selected value>
           {name}
@@ -177,13 +177,13 @@ export default function PeopleListingSection() {
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
-              // defaultval="Any count"
+            // defaultval="Any count"
             />
 
             <div
               data-orientation="vertical"
               role="none"
-              className="shrink-0 bg-neutral-200 dark:bg-neutral-800 w-[1px] hidden sm:inline h-auto"
+              className="shrink-0 bg-neutral-200 w-[1px] hidden sm:inline h-auto"
             ></div>
           </div>
         </div>
@@ -200,7 +200,7 @@ export default function PeopleListingSection() {
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
-            // defaultval="Any timeline"
+          // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -211,14 +211,14 @@ export default function PeopleListingSection() {
           <div className="font-bold text-lg pl-2 mt-4">
             {frame[0] as string}
           </div>
-          <div className="flex flex-row flex-wrap">
+          < div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6" >
             {userlistings
               .sort((a, b) =>
                 a.post_datetime > b.post_datetime
                   ? 1
                   : b.post_datetime > a.post_datetime
-                  ? -1
-                  : 0
+                    ? -1
+                    : 0
               )
               .filter(
                 (f) =>
