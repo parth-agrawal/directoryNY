@@ -1,5 +1,7 @@
 import axios from "axios";
 import { getAuth } from "firebase/auth";
+import { useAuthState } from 'react-firebase-hooks/auth';
+import firebaseApp from "../src/firebase";
 
 export const EP = {
   listings: {
@@ -46,13 +48,16 @@ export const api = axios.create({
 
 
 
+
 api.interceptors.request.use(async (config) => {
-  const auth = getAuth();
-  const token = await auth.currentUser?.getIdToken();
-  console.log("attaching token", token)
+  const token = sessionStorage.getItem('firebaseUserToken');
   if (token) {
     config.headers.Authorization = `Bearer ${token}`;
+    console.log("Authorization header set");
+  } else {
+    console.log("No token available, request will be unauthorized");
   }
+
   return config;
 }, (error) => {
   return Promise.reject(error);
