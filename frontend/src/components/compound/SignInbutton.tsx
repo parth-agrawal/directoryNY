@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import firebaseApp from '../../firebase';
 import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged } from "firebase/auth";
-import api from '../../../network/api';
 
 interface ReloadUserInfo {
     screenName: string;
@@ -49,7 +48,6 @@ const SignInButton = () => {
             setUser(user as ExtendedUser)
         }
     })
-
     const signOut = () => {
         auth.signOut()
     }

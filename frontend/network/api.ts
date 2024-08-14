@@ -9,7 +9,15 @@ export const EP = {
     getListingById: (listingId: string) => `/space-listings/${listingId}`,
     updateListing: (listingId: string) => `/space-listings/${listingId}`,
     deleteListing: (listingId: string) => `/space-listings/${listingId}`
+  },
+  users: {
+    getAllUsers: "/users/all",
+    getUserById: (userId: string) => `/users/${userId}`,
+    createUser: `/users/new`,
+    updateUser: (userId: string) => `/users/${userId}`,
+    deleteUser: (userId: string) => `/users/${userId}`
   }
+
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
