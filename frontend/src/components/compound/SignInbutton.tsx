@@ -23,6 +23,10 @@ const SignInButton = () => {
                 console.log('hello user', user)
                 const username = user.reloadUserInfo.screenName
                 const token = user.accessToken;
+
+                sessionStorage.setItem('firebaseUserToken', token);
+
+
                 const request = await fetch(`http://localhost:3000/test`, {
                     method: 'POST',
                     headers: {
