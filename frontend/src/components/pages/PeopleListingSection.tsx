@@ -3,6 +3,7 @@ import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { UserListingProps, UserListingType } from "../types";
 import { userlistings } from "../../userlistings";
+import ProfileBanner from "../compound/Banner/ProfileBanner";
 
 export default function PeopleListingSection() {
   const currentDate = new Date();
@@ -85,6 +86,8 @@ export default function PeopleListingSection() {
   return (
     <>
       {/* selection filters */}
+      <ProfileBanner />
+
       <FilterSection onFilterChange={handleFilterChange} />
       {/* Map user cards */}
       < div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6" >
