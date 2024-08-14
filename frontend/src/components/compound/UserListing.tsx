@@ -73,8 +73,7 @@ export default function UserListing({
                   />
                   <span className="text-blue-500 hover:text-blue-400 m-1">
                     {"Referrer"}
-                  <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
-                    {"Referrer"}
+
                   </span>
                 </a>
               </div>

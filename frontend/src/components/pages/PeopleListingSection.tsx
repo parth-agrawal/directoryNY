@@ -1,11 +1,9 @@
-import { useState } from "react";
-import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { useEffect, useState } from "react";
 // import { UserListingProps, UserListingType } from "../types";
 import { UserListingType } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
-import { userlistings } from "../../userlistings";
+import ProfileBanner from "../compound/Banner/ProfileBanner";
 
 // type UserPreference = Pick<
 //   UserListingType,
@@ -17,7 +15,7 @@ import { userlistings } from "../../userlistings";
 export default function PeopleListingSection() {
   const [userlistings, setuserListings] = useState<Array<UserListingType>>([]);
   const currentDate = new Date();
-  
+
 
   console.log("people section");
   console.log("userlistingservice");
@@ -25,8 +23,8 @@ export default function PeopleListingSection() {
     UserListingService()
       .getAll()
       .then((listings) => {
-        console.log("listings", listings.data);
-        setuserListings(listings.data);
+        console.log("listings", listings.data.userlistings);
+        setuserListings(listings.data.userlistings);
       });
   }, []);
 
@@ -88,21 +86,21 @@ export default function PeopleListingSection() {
     console.log("frame", frame);
     userlistings
       .sort((a, b) =>
-        a.post_datetime > b.post_datetime
+        a.createdAt > b.createdAt
           ? 1
-          : b.post_datetime > a.post_datetime
+          : b.createdAt > a.createdAt
             ? -1
             : 0
       )
       .filter((f) => {
-        console.log(new Date(f.post_datetime), frame);
+        console.log(new Date(f.createdAt), frame);
         console.log(
-          new Date(f.post_datetime) <= frame[1],
-          new Date(f.post_datetime) > frame[2]
+          new Date(f.createdAt) <= frame[1],
+          new Date(f.createdAt) > frame[2]
         );
         return (
-          new Date(f.post_datetime) <= frame[1],
-          new Date(f.post_datetime) > frame[2]
+          new Date(f.createdAt) <= frame[1],
+          new Date(f.createdAt) > frame[2]
         );
       })
       .map((listing) => {
@@ -139,7 +137,7 @@ export default function PeopleListingSection() {
         defaultValue={defaultval}
         className="flex h-10 w-full items-center justify-between rounded-md border border-neutral-200 bg-[#FFFDF3] px-3 py-2 text-sm ring-offset-white placeholder:text-neutral-500 focus:outline-none focus:ring-2 focus:ring-neutral-950 focus:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50 [&amp;>span]:line-clamp-1  "
       >
-        <option disabled selected value>
+        <option disabled selected>
           {name}
         </option>
         {options.map((opt) => (
@@ -173,7 +171,7 @@ export default function PeopleListingSection() {
         <div className="flex flex-col gap-2 grow">
           <label
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            for="Preferences"
+            htmlFor="Preferences"
           >
             Preference Filters
           </label>
@@ -210,7 +208,7 @@ export default function PeopleListingSection() {
         <div className="flex flex-col gap-2 grow">
           <label
             className="text-sm font-medium leading-none peer-disabled:cursor-not-allowed peer-disabled:opacity-70"
-            for="Timeline"
+            htmlFor="Timeline"
           >
             Timeline
           </label>
@@ -235,26 +233,26 @@ export default function PeopleListingSection() {
           < div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6" >
             {userlistings
               .sort((a, b) =>
-                a.post_datetime > b.post_datetime
+                a.createdAt > b.createdAt
                   ? 1
-                  : b.post_datetime > a.post_datetime
+                  : b.createdAt > a.createdAt
                     ? -1
                     : 0
               )
               .filter(
                 (f) =>
-                  new Date(f.post_datetime) <= frame[1] &&
-                  new Date(f.post_datetime) > frame[2]
+                  new Date(f.createdAt) <= frame[1] &&
+                  new Date(f.createdAt) > frame[2]
               )
               .filter((f) => {
                 // console.log(f.lease_roommates_preference);
                 return (
                   (leaselengthpreference === default_values[0] ||
-                    leaselengthpreference === f.lease_length_preference) &&
+                    leaselengthpreference === f.leaselength) &&
                   (leaseroommatereference === default_values[1] ||
-                    leaseroommatereference === f.lease_roommates_preference) &&
+                    leaseroommatereference === f.leaselength) &&
                   (leasetimingpreference === default_values[2] ||
-                    leasetimingpreference === f.lease_timing_preference)
+                    leasetimingpreference === f.leaselength)
                 );
               })
               .map((listing) => (
