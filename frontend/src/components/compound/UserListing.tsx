@@ -1,8 +1,7 @@
 import SpaceListingService from "../../lib/services/Space-Listing/service";
 
 import { UserListingType } from "../../lib/services/User-Listing/types";
-import TwitterIcon from '@mui/icons-material/Twitter';
-
+import TwitterIcon from "@mui/icons-material/Twitter";
 
 //https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg
 
@@ -26,7 +25,7 @@ export default function UserListing({
           <div className="flex flex-col items-center max-w-[60%] bg-inherit">
             <span className="font-semibold">{"NAME"}</span>
             {/* twitter handle with icon */}
-            <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2" >
+            <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2">
               @{"twitterhandle"}
               <span className="text-blue-500 ml-0.5 ">
                 <TwitterIcon fontSize="small" />
@@ -60,10 +59,7 @@ export default function UserListing({
                 <span className="text-xs md:text-sm font-semibold mr-1">
                   Referred by
                 </span>
-                <a
-                  href={"twitter.com"}
-                  className="flex items-center"
-                >
+                <a href={"twitter.com"} className="flex items-center">
                   <img
                     className="rounded-full w-7 h-7 undefined"
                     alt="User profile image"
@@ -71,9 +67,8 @@ export default function UserListing({
                       "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"
                     }
                   />
-                  <span className="text-blue-500 hover:text-blue-400 m-1">
+                  <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
                     {"Referrer"}
-
                   </span>
                 </a>
               </div>
