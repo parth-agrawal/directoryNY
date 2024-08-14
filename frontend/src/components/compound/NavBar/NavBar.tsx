@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHouse, faUserPlus } from '@fortawesome/free-solid-svg-icons';
 import UserDropdown from "./UserDropdown";
@@ -11,7 +11,7 @@ export default function NavBar() {
   const [showReferralForm, setShowReferralForm] = useState(false);
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white">
+    <nav className="fixed top-0 left-0 right-0 bg-primary">
       <div className="container mx-auto px-4 py-2 flex justify-between items-center">
         {/* Directory NY logo */}
         <div className="flex-shrink-0">

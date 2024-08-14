@@ -3,6 +3,7 @@ import { UserService } from "../../lib/services/users/service"
 import { SpaceListing, SpaceListingInput } from "../../lib/services/Space-Listing/types"
 import SpaceListingService from "../../lib/services/Space-Listing/service"
 import { SpaceListingCreateForm } from "./SpaceListingCreateForm"
+import SpaceBanner from "./Banner/SpaceBanner"
 
 export const CreateSpaceListingArea = () => {
 
@@ -43,17 +44,7 @@ export const CreateSpaceListingArea = () => {
 
     return (
         <div>
-            <div className="flex flex-col p-4 border border-2 rounded-lg bg-[#EDFCDC] gap-2">
-                <div className="text-2xl font-bold">
-
-                    🏡 Have a co-living space, sublet, or vacant room?
-                </div>
-                <div className="text-xl ">
-                    Add your space to be discovered by people looking for housing.
-                </div>
-                {userSpaceListings.length > 0 ? <EditSpaceArea /> : <SpaceListingCreateButton clickHandler={handleCreateSpaceClick} />}
-                {createFormVisible ? <SpaceListingCreateForm /> : null}
-            </div>
+            <SpaceBanner />
 
 
         </div>

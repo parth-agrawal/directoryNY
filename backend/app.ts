@@ -4,6 +4,7 @@ import userRouter from "./lib/controllers/users/controller";
 import auth, { requireAuth, userMiddleware } from "./middleware/auth";
 import spaceListingsRouter from "./lib/controllers/space-listings/controller";
 import userListingsRouter from "./lib/controllers/user-listings/controller";
+import referralRoutes from "./lib/controllers/referrals/controller";
 
 const app = express();
 app.use(
@@ -26,7 +27,7 @@ app.use("/api", userRouter);
 
 app.use('/api/space-listings', spaceListingsRouter);
 app.use('/api/user-listings', userListingsRouter);
-
+app.use('/api/referral', referralRoutes);
 
 app.get("/", (req, res) => {
 	res.send("Hello World!");

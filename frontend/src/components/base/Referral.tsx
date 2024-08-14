@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faTimes } from '@fortawesome/free-solid-svg-icons';
+import { api } from "../../../network/api";
 
 interface ReferralProps {
     onClose: () => void;
@@ -8,13 +9,43 @@ interface ReferralProps {
 
 const Referral: React.FC<ReferralProps> = ({ onClose }) => {
     const [copied, setCopied] = useState(false);
-    const referralLink = 'https://directorysf.com/?referralCode=YOURCODE';
+    const [referralCode, setReferralCode] = useState('');
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState('');
+
+    useEffect(() => {
+        fetchReferralCode();
+    }, []);
+
+    const fetchReferralCode = async () => {
+        try {
+
+            const userId = 'current-user-id'; // This should be replaced with actual user ID
+            const response = await api.get(`/referral/code/${userId}`);
+            setReferralCode(response.data.referralCode);
+            setLoading(false);
+        } catch (error) {
+            console.error('Failed to fetch referral code:', error);
+            setError('Failed to fetch referral code. Please try again.');
+            setLoading(false);
+        }
+    };
+
+    const referralLink = `https://directoryNY.com/?referralCode=${referralCode}`;
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(referralLink);
         setCopied(true);
         setTimeout(() => setCopied(false), 2000);
     };
+
+    if (loading) {
+        return <div>Loading...</div>;
+    }
+
+    if (error) {
+        return <div>{error}</div>;
+    }
 
     return (
         <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">

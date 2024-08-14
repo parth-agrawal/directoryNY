@@ -1,5 +1,4 @@
 import { CreateSpaceListingArea } from "./components/compound/CreateSpaceListingArea";
-
 import NavBar from "./components/compound/NavBar/NavBar";
 
 import PeopleListingSection from "./components/pages/PeopleListingSection";

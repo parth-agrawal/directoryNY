@@ -11,7 +11,7 @@ generator client {
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
-} 
+}
 
 // models
 
@@ -32,8 +32,20 @@ model User {
   ReferredUsers  User[]         @relation("Referrals")
   UserListing    UserListing[]
   HelpForm       HelpForm[]
+  Referrals      Referral[]
 
   @@map("user")
+}
+
+model Referral {
+  id           String   @id @default(cuid())
+  referrerId   String
+  referrer     User     @relation(fields: [referrerId], references: [id])
+  referredUser String
+  createdAt    DateTime @default(now())
+  status       String   @default("pending")
+
+  @@map("referral")
 }
 
 model UserListing {
