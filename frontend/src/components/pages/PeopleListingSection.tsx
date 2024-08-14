@@ -2,6 +2,7 @@ import { useState } from "react";
 import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { UserListingProps, UserListingType } from "../types";
+import { userlistings } from "../../userlistings";
 
 // type UserPreference = Pick<
 //   UserListingType,
