@@ -53,6 +53,7 @@ const SignInButton = () => {
         }
     })
     const signOut = () => {
+        sessionStorage.removeItem('firebaseUserToken');
         auth.signOut()
     }
 
