@@ -1,131 +1,11 @@
+import { useState } from "react";
+import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { UserListingProps, UserListingType } from "../types";
+import { userlistings } from "../../userlistings";
 
 export default function PeopleListingSection() {
   const currentDate = new Date();
-  const userlistings = [
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(3).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: "2000-01-10",
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-  ];
-  console.log(userlistings);
   function adj_date(number: number) {
     const current_copy = new Date(currentDate.valueOf());
     current_copy.setDate(current_copy.getDate() - number);
@@ -170,8 +50,8 @@ export default function PeopleListingSection() {
         a.post_datetime > b.post_datetime
           ? 1
           : b.post_datetime > a.post_datetime
-          ? -1
-          : 0
+            ? -1
+            : 0
       )
       .filter((f) => {
         console.log(new Date(f.post_datetime), frame);
@@ -189,34 +69,59 @@ export default function PeopleListingSection() {
         return listing;
       });
   });
+
+  // values from filter section
+  const [filterValues, setFilterValues] = useState({
+    leaseTiming: '',
+    housemateCount: '',
+    movingIn: ''
+  });
+
+  const handleFilterChange = (name: string, value: string) => {
+    setFilterValues(prev => ({ ...prev, [name]: value }));
+    console.log(filterValues);
+  };
+
   return (
     <>
-      <div className="flex flex-row flex-wrap">
-        {userlistings.map((listing) => (
-          <UserListing UserData={listing} />
-        ))}
-      </div>
-      {POSTING_TIME_FRAMES.map((frame) => (
-        <div>
-          <div>{frame[0] as string}</div>
-          {userlistings
-            .sort((a, b) =>
-              a.post_datetime > b.post_datetime
-                ? 1
-                : b.post_datetime > a.post_datetime
-                ? -1
-                : 0
-            )
-            .filter(
-              (f) =>
-                new Date(f.post_datetime) <= frame[1] &&
-                new Date(f.post_datetime) > frame[2]
-            )
-            .map((listing) => (
+      {/* selection filters */}
+      <FilterSection onFilterChange={handleFilterChange} />
+      {/* Map user cards */}
+      < div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6" >
+        {
+          userlistings.map((listing) => (
+            <div className="bg-inherit">
               <UserListing UserData={listing} />
-            ))}
-        </div>
-      ))}
+            </div>
+          ))
+        }
+      </div >
+      {
+        POSTING_TIME_FRAMES.map((frame) => (
+          <div>
+            {/* This month section */}
+            <div>{frame[0] as string}</div>
+            {userlistings
+              .sort((a, b) =>
+                a.post_datetime > b.post_datetime
+                  ? 1
+                  : b.post_datetime > a.post_datetime
+                    ? -1
+                    : 0
+              )
+              .filter(
+                (f) =>
+                  new Date(f.post_datetime) <= frame[1] &&
+                  new Date(f.post_datetime) > frame[2]
+              )
+              .map((listing) => (
+                <div className="bg-inherit w-full">
+                  <UserListing UserData={listing} />
+                </div>
+              ))}
+          </div>
+        ))
+      }
       {/* <TimeFrame /> */}
 
       <div className="flex flex-row bg-[#FEFBEB]">
@@ -230,3 +135,4 @@ export default function PeopleListingSection() {
     </>
   );
 }
+
