@@ -12,6 +12,12 @@ router.get('/users/all', async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 })
+
+router.get('/users/current', async (req, res) => {
+  const user = req.user
+  res.json(user)
+})
+
 router.get('/users/:userId', async (req, res) => {
   try {
     const user = await UserService().getUserById({ userId: req.params.userId });
@@ -21,6 +27,8 @@ router.get('/users/:userId', async (req, res) => {
     res.status(500).json({ error: "Internal server error" });
   }
 });
+
+
 
 router.post('/users/new', async (req, res) => {
   try {
