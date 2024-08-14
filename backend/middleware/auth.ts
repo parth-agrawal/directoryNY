@@ -28,13 +28,13 @@ export const requireAuth = async (req: Request, res: Response, next: NextFunctio
     return res.status(401).json({ message: "Token not found" });
   }
   const details = await auth.verifyIdToken(token);
-  console.log('banana details', details)
   const userdetails = await auth.getUser(details.uid);
   //   todo: add userdetails to req
   console.log("userdetails: ", userdetails);
 
+
   req["userFirebaseId"] = details.uid;
-  req["userTwitterDetails"] = { "displayName": userdetails.displayName, "profilePicture": userdetails.photoURL }
+  req["userTwitterDetails"] = { "displayName": userdetails.displayName ? userdetails.displayName : "A Twitter Friend", "profilePicture": userdetails.photoURL ? userdetails.photoURL : "https://images.spr.so/cdn-cgi/imagedelivery/j42No7y-dcokJuNgXeA0ig/f068d325-7a1f-4b06-a3ce-9cd8bab3f632/DALLE_2024-01-26_18.29.54_-_Create_a_highly_simplified_and_minimalist_pixelated_vector_illustration_of_a_1990s_computer_setup_inspired_by_Susan_Kares_iconic_design_style._The_i/w=256,quality=90,fit=scale-down" }
   next();
 };
 
