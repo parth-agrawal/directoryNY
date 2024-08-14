@@ -33,6 +33,9 @@ model User {
   UserListing    UserListing[]
   HelpForm       HelpForm[]
   Referrals      Referral[]
+  twitterDisplay String
+  twitterHandle  String
+  twitterPhoto   String
 
   @@map("user")
 }
@@ -49,15 +52,18 @@ model Referral {
 }
 
 model UserListing {
-  id          String  @id @default(cuid())
-  user_id     String
-  User        User    @relation(fields: [user_id], references: [id])
-  housingtype String
-  moveInTime  String
-  housemates  String
-  website     String?
-  phone       String?
-  email       String?
+  id              String   @id @default(cuid())
+  createdAt       DateTime @default(now())
+  updatedAt       DateTime @default(now()) @updatedAt
+  user_id         String
+  User            User     @relation(fields: [user_id], references: [id])
+  leaselength     String
+  moveInTime      String
+  housematesCount String
+  description     String
+  website         String?
+  phone           String?
+  email           String?
 
   @@map("userlisting")
 }

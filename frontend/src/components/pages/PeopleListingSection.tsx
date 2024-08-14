@@ -1,9 +1,11 @@
 import { useState } from "react";
 import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
-import { UserListingProps, UserListingType } from "../types";
+import { useEffect, useState } from "react";
+// import { UserListingProps, UserListingType } from "../types";
+import { UserListingType } from "../../lib/services/User-Listing/types";
+import UserListingService from "../../lib/services/User-Listing/service";
 import { userlistings } from "../../userlistings";
-import ProfileBanner from "../compound/Banner/ProfileBanner";
 
 // type UserPreference = Pick<
 //   UserListingType,
@@ -13,7 +15,21 @@ import ProfileBanner from "../compound/Banner/ProfileBanner";
 // >;
 
 export default function PeopleListingSection() {
+  const [userlistings, setuserListings] = useState<Array<UserListingType>>([]);
   const currentDate = new Date();
+  
+
+  console.log("people section");
+  console.log("userlistingservice");
+  useEffect(() => {
+    UserListingService()
+      .getAll()
+      .then((listings) => {
+        console.log("listings", listings.data);
+        setuserListings(listings.data);
+      });
+  }, []);
+
   const default_values: [string, string, string] = [
     "Any lease",
     "Any count",
@@ -67,6 +83,7 @@ export default function PeopleListingSection() {
   //     );
   //   });
   // };
+
   POSTING_TIME_FRAMES.map((frame) => {
     console.log("frame", frame);
     userlistings
@@ -210,6 +227,7 @@ export default function PeopleListingSection() {
       </div>
 
       {POSTING_TIME_FRAMES.map((frame) => (
+
         <>
           <div className="font-bold text-lg pl-2 mt-4">
             {frame[0] as string}

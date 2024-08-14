@@ -1,4 +1,3 @@
-
 /*
 Prisma schema:
 model User {
@@ -29,8 +28,11 @@ export type User = {
   updatedAt: string;
   name: string;
   clerkId: string;
-  referredId: string;
-}
+  referredByUser?: string;
+  twitterDisplay: string;
+  twitterHandle: string;
+  twitterPhoto: string;
+};
 export interface IUserService {
   getById: (userId: string) => Response<{ user: User }>;
   getAll: () => Response<{ users: User[] }>;
