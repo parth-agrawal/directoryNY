@@ -19,13 +19,17 @@ const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
 		return res.status(401).json({ message: "Token not found" });
 	}
 	const details = await auth.verifyIdToken(token);
+	console.log('banana details', details)
 	const userdetails = await auth.getUser(details.uid);
 	//   todo: add userdetails to req
 	console.log("userdetails: ", userdetails);
 
-	req["user"] = details;
+	req["userFirebaseId"] = details.uid;
+	req["userTwitterDetails"] = { "displayName": userdetails.displayName, "profilePicture": userdetails.photoURL }
 	next();
 };
+
+// screen name is in the token response under reloadUserInfo.screenName	
 
 // app.post('/referralCheck', (req, res) => {
 // })

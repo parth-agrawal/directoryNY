@@ -16,7 +16,7 @@ export const UserService = (): IUserService => ({
         })
         return user
     },
-    createUser: async ({ newUser }: { newUser: Omit<User, 'id'> }) => {
+    createUser: async ({ newUser }: { newUser: Omit<User, 'id' | 'createdAt' | 'updatedAt'> }) => {
         const user = await prisma.user.create({
             data: newUser
         })
@@ -36,6 +36,14 @@ export const UserService = (): IUserService => ({
         const user = await prisma.user.delete({
             where: {
                 id: userId
+            }
+        })
+        return user
+    },
+    getUserByFirebaseId: async ({ firebaseId }: { firebaseId: string }) => {
+        const user = await prisma.user.findUnique({
+            where: {
+                firebaseId: firebaseId
             }
         })
         return user
