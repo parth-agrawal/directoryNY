@@ -33,10 +33,7 @@ model User {
   UserListing    UserListing[]
   HelpForm       HelpForm[]
   Referrals      Referral[]
-  twitterDisplay String
-  twitterHandle  String
-  twitterPhoto   String
-
+  
   @@map("user")
 }
 
