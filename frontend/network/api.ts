@@ -8,6 +8,11 @@ export const EP = {
     getListingById: (listingId: string) => `/space-listings/${listingId}`,
     updateListing: (listingId: string) => `/space-listings/${listingId}`,
     deleteListing: (listingId: string) => `/space-listings/${listingId}`
+  },
+  referrals: {
+    getReferralCode: (userId: string) => `/referral/code/${userId}`,
+    applyReferralCode: "/referral/apply",
+    getReferralStatus: (referralId: string) => `/referral/status/${referralId}`
   }
 }
 
@@ -19,5 +24,13 @@ export const api = axios.create({
     "Content-Type": "application/json",
   }
 })
+
+// Referral-related API functions
+export const referralApi = {
+  getReferralCode: (userId: string) => api.get(EP.referrals.getReferralCode(userId)),
+  applyReferralCode: (newUserId: string, referralCode: string) =>
+    api.post(EP.referrals.applyReferralCode, { newUserId, referralCode }),
+  getReferralStatus: (referralId: string) => api.get(EP.referrals.getReferralStatus(referralId))
+}
 
 export default api;
