@@ -1,130 +1,144 @@
 import UserListing from "../compound/UserListing";
-import { UserListingProps, UserListingType } from "../types";
+import { useEffect, useState } from "react";
+// import { UserListingProps, UserListingType } from "../types";
+import { UserListingType } from "../../lib/services/User-Listing/types";
+import UserListingService from "../../lib/services/User-Listing/service";
 
 export default function PeopleListingSection() {
+  const [userlistings, setuserListings] = useState<Array<UserListingType>>([]);
   const currentDate = new Date();
-  const userlistings = [
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(10).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: adj_date(3).toString(),
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-    {
-      post_datetime: "2000-01-10",
-      contact: {
-        twitter_handle: "mytwitter",
-        twitter_url: "google.com",
-      },
-      name: "bob",
-      twitter_photo_url:
-        "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      description:
-        "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
-      lease_preference: "A day",
-      lease_timing: "soon",
-      referrer_info: {
-        name: "Hello",
-        twitter_url: "google.com",
-        twitter_photo_url:
-          "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
-      },
-    },
-  ];
+  console.log("people section");
+  console.log("userlistingservice");
+  useEffect(() => {
+    UserListingService()
+      .getAll()
+      .then((listings) => {
+        console.log("listings", listings.data);
+        setuserListings(listings.data);
+      });
+  }, []);
+  // const userlistings = [
+  //   {
+  //     post_datetime: adj_date(10).toString(),
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  //   {
+  //     post_datetime: adj_date(10).toString(),
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  //   {
+  //     post_datetime: adj_date(10).toString(),
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  //   {
+  //     post_datetime: adj_date(10).toString(),
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  //   {
+  //     post_datetime: adj_date(3).toString(),
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  //   {
+  //     post_datetime: "2000-01-10",
+  //     contact: {
+  //       twitter_handle: "mytwitter",
+  //       twitter_url: "google.com",
+  //     },
+  //     name: "bob",
+  //     twitter_photo_url:
+  //       "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     description:
+  //       "A description. Lorem ipsum dolor amit. I like pizza, pizza is good to eat. Please givem e more pizza",
+  //     lease_preference: "A day",
+  //     lease_timing: "soon",
+  //     referrer_info: {
+  //       name: "Hello",
+  //       twitter_url: "google.com",
+  //       twitter_photo_url:
+  //         "https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg",
+  //     },
+  //   },
+  // ];
   console.log(userlistings);
   function adj_date(number: number) {
     const current_copy = new Date(currentDate.valueOf());
@@ -163,32 +177,32 @@ export default function PeopleListingSection() {
   //     );
   //   });
   // };
-  POSTING_TIME_FRAMES.map((frame) => {
-    console.log("frame", frame);
-    userlistings
-      .sort((a, b) =>
-        a.post_datetime > b.post_datetime
-          ? 1
-          : b.post_datetime > a.post_datetime
-          ? -1
-          : 0
-      )
-      .filter((f) => {
-        console.log(new Date(f.post_datetime), frame);
-        console.log(
-          new Date(f.post_datetime) <= frame[1],
-          new Date(f.post_datetime) > frame[2]
-        );
-        return (
-          new Date(f.post_datetime) <= frame[1],
-          new Date(f.post_datetime) > frame[2]
-        );
-      })
-      .map((listing) => {
-        console.log("listing", listing);
-        return listing;
-      });
-  });
+  // POSTING_TIME_FRAMES.map((frame) => {
+  //   console.log("frame", frame);
+  //   userlistings
+  //     .sort((a, b) =>
+  //       a.post_datetime > b.post_datetime
+  //         ? 1
+  //         : b.post_datetime > a.post_datetime
+  //         ? -1
+  //         : 0
+  //     )
+  //     .filter((f) => {
+  //       console.log(new Date(f.post_datetime), frame);
+  //       console.log(
+  //         new Date(f.post_datetime) <= frame[1],
+  //         new Date(f.post_datetime) > frame[2]
+  //       );
+  //       return (
+  //         new Date(f.post_datetime) <= frame[1],
+  //         new Date(f.post_datetime) > frame[2]
+  //       );
+  //     })
+  //     .map((listing) => {
+  //       console.log("listing", listing);
+  //       return listing;
+  //     });
+  // });
   return (
     <>
       <div className="flex flex-row flex-wrap">
@@ -201,16 +215,12 @@ export default function PeopleListingSection() {
           <div>{frame[0] as string}</div>
           {userlistings
             .sort((a, b) =>
-              a.post_datetime > b.post_datetime
-                ? 1
-                : b.post_datetime > a.post_datetime
-                ? -1
-                : 0
+              a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
             )
             .filter(
               (f) =>
-                new Date(f.post_datetime) <= frame[1] &&
-                new Date(f.post_datetime) > frame[2]
+                new Date(f.createdAt) <= frame[1] &&
+                new Date(f.createdAt) > frame[2]
             )
             .map((listing) => (
               <UserListing UserData={listing} />
