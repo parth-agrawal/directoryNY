@@ -6,9 +6,10 @@ interface ReferralProps {
     onClose: () => void;
 }
 
+
 const Referral: React.FC<ReferralProps> = ({ onClose }) => {
     const [copied, setCopied] = useState(false);
-    const referralLink = 'https://directorysf.com/?referralCode=YOURCODE';
+    const referralLink = 'https://directoryNY.com/?referralCode';
 
     const copyToClipboard = () => {
         navigator.clipboard.writeText(referralLink);
