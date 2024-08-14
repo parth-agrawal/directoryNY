@@ -10,6 +10,11 @@ export const EP = {
     updateListing: (listingId: string) => `/space-listings/${listingId}`,
     deleteListing: (listingId: string) => `/space-listings/${listingId}`
   },
+  referrals: {
+    getReferralCode: (userId: string) => `/referral/code/${userId}`,
+    applyReferralCode: "/referral/apply",
+    getReferralStatus: (referralId: string) => `/referral/status/${referralId}`
+  },
   users: {
     getAllUsers: "/users/all",
     getUserById: (userId: string) => `/users/${userId}`,
@@ -17,7 +22,6 @@ export const EP = {
     updateUser: (userId: string) => `/users/${userId}`,
     deleteUser: (userId: string) => `/users/${userId}`
   }
-
 }
 
 const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
@@ -28,5 +32,13 @@ export const api = axios.create({
     "Content-Type": "application/json",
   }
 })
+
+// Referral-related API functions
+export const referralApi = {
+  getReferralCode: (userId: string) => api.get(EP.referrals.getReferralCode(userId)),
+  applyReferralCode: (newUserId: string, referralCode: string) =>
+    api.post(EP.referrals.applyReferralCode, { newUserId, referralCode }),
+  getReferralStatus: (referralId: string) => api.get(EP.referrals.getReferralStatus(referralId))
+}
 
 export default api;
