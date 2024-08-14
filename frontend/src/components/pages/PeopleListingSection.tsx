@@ -233,26 +233,26 @@ export default function PeopleListingSection() {
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6">
             {userlistings
               .sort((a, b) =>
-                a.post_datetime > b.post_datetime
+                a.createdAt > b.createdAt
                   ? 1
-                  : b.post_datetime > a.post_datetime
+                  : b.createdAt > a.createdAt
                   ? -1
                   : 0
               )
               .filter(
                 (f) =>
-                  new Date(f.post_datetime) <= frame[1] &&
-                  new Date(f.post_datetime) > frame[2]
+                  new Date(f.createdAt) <= frame[1] &&
+                  new Date(f.createdAt) > frame[2]
               )
               .filter((f) => {
                 // console.log(f.lease_roommates_preference);
                 return (
                   (leaselengthpreference === default_values[0] ||
-                    leaselengthpreference === f.lease_length_preference) &&
+                    leaselengthpreference === f.leaselength) &&
                   (leaseroommatereference === default_values[1] ||
-                    leaseroommatereference === f.lease_roommates_preference) &&
+                    leaseroommatereference === f.housematesCount) &&
                   (leasetimingpreference === default_values[2] ||
-                    leasetimingpreference === f.lease_timing_preference)
+                    leasetimingpreference === f.moveInTime)
                 );
               })
               .map((listing) => (
