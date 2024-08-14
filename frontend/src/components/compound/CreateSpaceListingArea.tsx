@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react"
-import { useUserService } from "../../lib/services/users/service"
+import { UserService } from "../../lib/services/users/service"
 import { SpaceListing, SpaceListingInput } from "../../lib/services/Space-Listing/types"
 import SpaceListingService from "../../lib/services/Space-Listing/service"
 import { SpaceListingCreateForm } from "./SpaceListingCreateForm"
 
 export const CreateSpaceListingArea = () => {
 
-    const userService = useUserService();
+    const userService = UserService();
     const [userSpaceListings, setUserSpaceListings] = useState<SpaceListing[]>([]);
 
     useEffect(() => {
