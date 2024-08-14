@@ -3,6 +3,7 @@ import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { UserListingProps, UserListingType } from "../types";
 import { userlistings } from "../../userlistings";
+import ProfileBanner from "../compound/Banner/ProfileBanner";
 
 // type UserPreference = Pick<
 //   UserListingType,
@@ -148,6 +149,8 @@ export default function PeopleListingSection() {
   };
   return (
     <>
+      <ProfileBanner />
+
       {/* <div className="flex flex-col gap-4 mb-4"> */}
       <div className="flex flex-row gap-2 grow">
         <div className="flex flex-col gap-2 grow">
