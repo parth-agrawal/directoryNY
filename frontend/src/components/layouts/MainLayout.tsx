@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom";
 import NavBar from "../compound/NavBar/NavBar";
+import { useState } from "react";
 
 function ContactMe({
   phone,
@@ -10,6 +11,7 @@ function ContactMe({
   email: string | undefined;
   twitter_url: string | undefined;
 }) {
+  const [showContacts, setShowContacts] = useState(false);
   console.log("contact me");
   function IndividualContactMethod({
     contact_info,
@@ -31,9 +33,16 @@ function ContactMe({
       ),
     };
     //styles the button for the contact method, e.g. twitter
+    const contact_strings = {
+      twitter: twitter_url ? twitter_url : undefined,
+      phone: phone
+        ? `sms:${phone}&amp;body=%F0%9F%91%8B%20Hey%2C%20this%20is%20%F0%9F%99%88!%0AI%20saw%20your%20profile%20on%20DirectorySF%2C%20and%20wanted%20to%20reach%20out`
+        : undefined,
+      email: email ? `mailto:${email}` : undefined,
+    };
     return (
       <>
-        <a target="_blank" href={contact_info}>
+        <a target="_blank" href={contact_strings[method_type]}>
           <button
             disabled={!contact_info}
             className={
@@ -61,41 +70,38 @@ function ContactMe({
       </>
     );
   }
+  console.log(twitter_url, email, phone);
+  const contactPaneWrapper = () => (
+    <div
+      data-side="bottom"
+      data-align="center"
+      data-state="open"
+      role="dialog"
+      id="radix-:rgf:"
+      className="z-50 w-72 rounded-md border border-neutral-200 bg-white p-4 text-neutral-950 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50"
+      // style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
+      tabindex="-1"
+    >
+      <div className="flex justify-around">
+        <IndividualContactMethod contact_info={phone} method_type="phone" />
+        <IndividualContactMethod contact_info={email} method_type="email" />
+        <IndividualContactMethod
+          contact_info={twitter_url}
+          method_type="twitter"
+        />
+      </div>
+    </div>
+  );
   return (
     <>
-      <div>Hello contact</div>
       <button
+        onClick={() => setShowContacts(!showContacts)}
         aria-haspopup="dialog"
-        className="bg-[#1D462F] text-white rounded-3xl ring-offset-white font-semibold p-2 text-xs"
+        className="bg-[#1D462F] text-white rounded-3xl ring-offset-white font-semibold p-2 text-xs mb-1"
       >
         Contact me
       </button>
-      <div
-        data-side="bottom"
-        data-align="center"
-        data-state="open"
-        role="dialog"
-        id="radix-:rgf:"
-        className="z-50 w-72 rounded-md border border-neutral-200 bg-white p-4 text-neutral-950 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50"
-        // style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
-        tabindex="-1"
-      >
-        <div className="flex justify-around">
-          <IndividualContactMethod
-            contact_info={`sms:${phone}&amp;body=%F0%9F%91%8B%20Hey%2C%20this%20is%20%F0%9F%99%88!%0AI%20saw%20your%20profile%20on%20DirectorySF%2C%20and%20wanted%20to%20reach%20out`}
-            method_type="phone"
-          />
-          <IndividualContactMethod contact_info={email} method_type="email" />
-          <IndividualContactMethod
-            contact_info={twitter_url}
-            method_type="twitter"
-          />
-          <IndividualContactMethod
-            contact_info={undefined}
-            method_type="twitter"
-          />
-        </div>
-      </div>
+      {showContacts && contactPaneWrapper()}
     </>
   );
 }
@@ -152,11 +158,23 @@ const MainLayout: React.FC = () => {
       <main className="pt-44 xs:pt-52 sm:pt-32 md:pt-32 lg:pt-32 xl:pt-32 bg-primary">
         <Outlet />
       </main>
-      <ContactMe
-        phone="1000000000"
-        email="mailto:email@gmail.com"
-        twitter_url="http://www.x.com"
-      />
+      <center>
+        <ContactMe
+          phone="1000000000"
+          email="email@gmail.com"
+          twitter_url="http://www.x.com"
+        />
+        <ContactMe
+          phone={undefined}
+          email="email@gmail.com"
+          twitter_url="http://www.x.com"
+        />
+        <ContactMe
+          phone={undefined}
+          email={undefined}
+          twitter_url="http://www.x.com"
+        />
+      </center>
     </div>
   );
 };
