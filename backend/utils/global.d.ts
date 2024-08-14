@@ -3,9 +3,12 @@ import express from "express";
 declare global {
   namespace Express {
     interface Request {
-      auth: {
-        userId: string;
+      userFirebaseId?: string;
+      userTwitterDetails: {
+        displayName: string;
+        profilePicture: string;
       };
+      userId: string;
     }
   }
 }

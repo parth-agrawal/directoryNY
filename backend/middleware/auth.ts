@@ -1,7 +1,7 @@
 import admin from "firebase-admin";
 import { getAuth } from "firebase-admin/auth";
 import prisma from "../prisma/client"
-import { NextFunction } from "express";
+import { Request, Response, NextFunction } from "express";
 import { UserService } from "../lib/services/User/service";
 import { User } from "@prisma/client";
 
@@ -22,14 +22,32 @@ interface RequestWithDetails extends Request {
 }
 
 
+export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
+  const token = req.headers.authorization?.split(" ")[1];
+  if (!token) {
+    return res.status(401).json({ message: "Token not found" });
+  }
+  const details = await auth.verifyIdToken(token);
+  console.log('banana details', details)
+  const userdetails = await auth.getUser(details.uid);
+  //   todo: add userdetails to req
+  console.log("userdetails: ", userdetails);
+
+  req["userFirebaseId"] = details.uid;
+  req["userTwitterDetails"] = { "displayName": userdetails.displayName, "profilePicture": userdetails.photoURL }
+  next();
+};
+
+
 
 // add middleware that if the user doesn't exist, 
 // create them, and pass the user id into req.user
 
 // if they do exist, pass the user id from our database into req.user 
 
-const userMiddleware = async (req: RequestWithDetails, res: Response, next: NextFunction) => {
+export const userMiddleware = async (req: Request, res: Response, next: NextFunction) => {
   const firebaseId = req.userFirebaseId
+  if (!firebaseId) return res.status(401).json({ message: "Unauthorized" })
 
 
   try {
