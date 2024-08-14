@@ -1,15 +1,5 @@
 import { CreateSpaceListingArea } from "./components/compound/CreateSpaceListingArea";
-
 import NavBar from "./components/compound/NavBar/NavBar";
-
-import { SpaceListingCard } from "./components/compound/SpaceListingCard";
-
-import {
-  SignedIn,
-  SignedOut,
-  SignInButton,
-  UserButton,
-} from "@clerk/clerk-react";
 
 import PeopleListingSection from "./components/pages/PeopleListingSection";
 
@@ -17,7 +7,6 @@ import { getAuth } from "firebase/auth";
 
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "firebase/app";
-import Test from "./Test";
 // import SignInButton from "./Test";
 // import UserComponent from "./UserComponent";
 

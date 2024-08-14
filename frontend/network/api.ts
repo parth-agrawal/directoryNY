@@ -1,4 +1,5 @@
 import axios from "axios";
+import { User } from "../src/lib/services/users/types";
 
 export const EP = {
   listings: {
@@ -13,6 +14,13 @@ export const EP = {
     getReferralCode: (userId: string) => `/referral/code/${userId}`,
     applyReferralCode: "/referral/apply",
     getReferralStatus: (referralId: string) => `/referral/status/${referralId}`
+  },
+  users: {
+    getAllUsers: "/users/all",
+    getUserById: (userId: string) => `/users/${userId}`,
+    createUser: `/users/new`,
+    updateUser: (userId: string) => `/users/${userId}`,
+    deleteUser: (userId: string) => `/users/${userId}`
   }
 }
 
