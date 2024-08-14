@@ -1,10 +1,16 @@
 import SpaceListingService from "../../lib/services/Space-Listing/service";
-import { UserListingProps } from "../types";
+
+import { UserListingType } from "../../lib/services/User-Listing/types";
 import TwitterIcon from '@mui/icons-material/Twitter';
+
 
 //https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg
 
-export default function UserListing({ UserData }: UserListingProps) {
+export default function UserListing({
+  UserData,
+}: {
+  UserData: UserListingType;
+}) {
   return (
     <>
       <div className="p-4 bg-[#FFFDF3] rounded-2xl flex flex-col border-[1px] max-w-1/3 child-inherit-bg">
@@ -12,13 +18,16 @@ export default function UserListing({ UserData }: UserListingProps) {
           <img
             className="rounded-full w-20 h-20 lg:w-28 lg:h-28 undefined mb-2"
             alt="User profile image"
-            src={UserData.twitter_photo_url}
+            src={
+              "https://www.shutterstock.com/image-photo/boat-tree-sunset-600nw-1770893537.jpg"
+            }
           />
+
           <div className="flex flex-col items-center max-w-[60%] bg-inherit">
-            <span className="font-semibold">{UserData.name}</span>
+            <span className="font-semibold">{"NAME"}</span>
             {/* twitter handle with icon */}
             <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2" >
-              @{UserData.contact.twitter_handle}
+              @{"twitterhandle"}
               <span className="text-blue-500 ml-0.5 ">
                 <TwitterIcon fontSize="small" />
               </span>
@@ -38,13 +47,13 @@ export default function UserListing({ UserData }: UserListingProps) {
               <span className="text-xs md:text-sm font-semibold mr-1 bg-inherit">
                 Preference
               </span>
-              <span className="text-xs md:text-sm">{UserData.lease_preference}</span>
+              <span className="text-xs md:text-sm">{UserData.leaselength}</span>
             </div>
             <div>
               <span className="text-xs md:text-sm font-semibold mr-1 ">
                 Moving
               </span>{" "}
-              <span className="text-xs md:text-sm">{UserData.lease_timing}</span>
+              <span className="text-xs md:text-sm">{UserData.moveInTime}</span>
             </div>
             <div>
               <div className="flex flex-row items-center">
@@ -52,16 +61,20 @@ export default function UserListing({ UserData }: UserListingProps) {
                   Referred by
                 </span>
                 <a
-                  href={UserData.referrer_info.twitter_url}
+                  href={"twitter.com"}
                   className="flex items-center"
                 >
                   <img
                     className="rounded-full w-7 h-7 undefined"
                     alt="User profile image"
-                    src={UserData.referrer_info.twitter_photo_url}
+                    src={
+                      "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"
+                    }
                   />
+                  <span className="text-blue-500 hover:text-blue-400 m-1">
+                    {"Referrer"}
                   <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
-                    {UserData.referrer_info.name}
+                    {"Referrer"}
                   </span>
                 </a>
               </div>

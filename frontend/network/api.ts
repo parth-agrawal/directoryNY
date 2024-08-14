@@ -8,7 +8,18 @@ export const EP = {
     getListingByUserId: (userId: string) => `/space-listings/${userId}`,
     getListingById: (listingId: string) => `/space-listings/${listingId}`,
     updateListing: (listingId: string) => `/space-listings/${listingId}`,
-    deleteListing: (listingId: string) => `/space-listings/${listingId}`
+    deleteListing: (listingId: string) => `/space-listings/${listingId}`,
+  },
+  userlistings: {
+    createListing: "/user-listings/create",
+    getAllUserListings: "/user-listings/all",
+    getUserListingByUserId: (userId: string) => `/user-listings/${userId}`,
+    getUserListingById: (userlistingId: string) =>
+      `/user-listings/${userlistingId}`,
+    updateUserListing: (userlistingId: string) =>
+      `/user-listings/${userlistingId}`,
+    deleteUserListing: (userlistingId: string) =>
+      `/user-listings/${userlistingId}`,
   },
   referrals: {
     getReferralCode: (userId: string) => `/referral/code/${userId}`,
@@ -20,18 +31,18 @@ export const EP = {
     getUserById: (userId: string) => `/users/${userId}`,
     createUser: `/users/new`,
     updateUser: (userId: string) => `/users/${userId}`,
-    deleteUser: (userId: string) => `/users/${userId}`
-  }
-}
-
-const BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+    deleteUser: (userId: string) => `/users/${userId}`,
+  },
+};
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 
 export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
     "Content-Type": "application/json",
-  }
-})
+  },
+});
+
 
 // Referral-related API functions
 export const referralApi = {
