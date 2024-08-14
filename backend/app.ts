@@ -1,7 +1,7 @@
 import express, { NextFunction, Response, Request } from "express";
 import cors from "cors";
 import userRouter from "./lib/controllers/users/controller";
-import auth from "./middleware/auth";
+import auth, { requireAuth, userMiddleware } from "./middleware/auth";
 import spaceListingsRouter from "./lib/controllers/space-listings/controller";
 import userListingsRouter from "./lib/controllers/user-listings/controller";
 import referralRoutes from "./lib/controllers/referrals/controller";
@@ -14,21 +14,14 @@ app.use(
 );
 
 app.use(express.json());
-const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
-	const token = req.headers.authorization?.split(" ")[1];
-	if (!token) {
-		return res.status(401).json({ message: "Token not found" });
-	}
-	const details = await auth.verifyIdToken(token);
-	const userdetails = await auth.getUser(details.uid);
-	//   todo: add userdetails to req
-	console.log("userdetails: ", userdetails);
 
-	req["user"] = details;
-	next();
-};
+// screen name is in the token response under reloadUserInfo.screenName	
 
-// app.use(requireAuth);
+// app.post('/referralCheck', (req, res) => {
+// })
+
+app.use(requireAuth);
+app.use(userMiddleware);
 
 app.use("/api", userRouter);
 

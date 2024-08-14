@@ -1,5 +1,5 @@
 import axios from "axios";
-import { User } from "../src/lib/services/users/types";
+import { getAuth } from "firebase/auth";
 
 export const EP = {
   listings: {
@@ -39,10 +39,24 @@ const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000/api";
 export const api = axios.create({
   baseURL: BASE_URL,
   headers: {
+    // add firebase token to header
     "Content-Type": "application/json",
   },
 });
 
+
+
+api.interceptors.request.use(async (config) => {
+  const auth = getAuth();
+  const token = await auth.currentUser?.getIdToken();
+  console.log("attaching token", token)
+  if (token) {
+    config.headers.Authorization = `Bearer ${token}`;
+  }
+  return config;
+}, (error) => {
+  return Promise.reject(error);
+});
 
 // Referral-related API functions
 export const referralApi = {

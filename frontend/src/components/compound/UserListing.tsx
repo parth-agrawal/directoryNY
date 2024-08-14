@@ -67,9 +67,6 @@ export default function UserListing({
                       "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"
                     }
                   />
-                  <span className="text-blue-500 hover:text-blue-400 m-1">
-                    {"Referrer"}
-                  </span>
                   <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
                     {"Referrer"}
                   </span>
