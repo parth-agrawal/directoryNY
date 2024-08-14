@@ -15,7 +15,6 @@ router.get('/users/all', async (req, res) => {
 
 router.get('/users/current', async (req, res) => {
   const user = req.user
-  console.log('hello', req)
   res.json(user)
 })
 
