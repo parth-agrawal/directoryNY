@@ -1,6 +1,12 @@
+import UnprotectedNavbar from "../compound/NavBar/UnprotectedNavbar";
+import { useNavigate } from "react-router-dom";
+
 const UnprotectedHomepage = () => {
+    const navigate = useNavigate();
     return (
         <div className="h-screen">
+            <UnprotectedNavbar />
+
             <div className="flex flex-col items-center h-full gap-6">
                 <div className="relative flex justify-center min-h-20 min-w-24">
                     <img className="rounded-full w-20 lg:w-24 absolute top-0 left-[-40px]" alt="" src="https://www.directorysf.com/ellipse-51@3x.jpg" />
@@ -13,7 +19,7 @@ const UnprotectedHomepage = () => {
                     <span >Find rentals, housemates, sublets, and coliving communities in the SF tech scene</span>
                 </h1>
                 <span className="text-center text-gray-600 text-md sm:text-lg lg:text-xl">The SF housing directory of people you probably know</span>
-                <button className="bg-darkGreen text-white px-12 py-3 rounded-3xl text-xl">Apply</button>
+                <button onClick={() => navigate("/login/apply")} className="bg-darkGreen text-white px-12 py-3 rounded-3xl text-xl">Apply</button>
                 <span className="text-center text-gray-400 text-md sm:text-lg lg:text-xl">Have an account? Sign in</span>
 
                 <div className="flex text-center gap-2 md:gap-4 border border-gray-300 rounded-3xl p-4 mt-8 text-sm">
