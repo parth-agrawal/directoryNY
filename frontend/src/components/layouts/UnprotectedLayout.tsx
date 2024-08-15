@@ -5,7 +5,6 @@ const UnprotectedLayout: React.FC = () => {
     return (
         <div>
             <main className=" bg-primary">
-                <UnprotectedNavbar />
                 <div>
                     <Outlet />
                 </div>

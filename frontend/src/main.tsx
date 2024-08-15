@@ -10,6 +10,7 @@ import MainLayout from "./components/layouts/MainLayout.tsx";
 import { Login } from "./components/pages/Login.tsx";
 import UnprotectedHomepage from "./components/pages/UnprotectedHomepage.tsx";
 import UnprotectedLayout from "./components/layouts/UnprotectedLayout.tsx";
+import ApplyPage from "./components/pages/ApplyPage.tsx";
 
 const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ const router = createBrowserRouter([
         index: true,
         element: <UnprotectedHomepage />
       },
+      {
+        path: "apply",
+        element: <ApplyPage />
+      }
 
     ]
   },
