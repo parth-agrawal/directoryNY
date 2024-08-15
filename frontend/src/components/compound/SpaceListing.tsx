@@ -59,7 +59,7 @@ export default function SpaceListingCard({
         </span>
         <div className="flex flex-col">
           <div className=" rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-slate-600">
-            {UserData.description}
+            {SpaceData.description}
           </div>
           {/* <div className="flex flex-row gap-2"> */}
           <div className="text-xs md:text-sm bg-inherit">
@@ -67,7 +67,7 @@ export default function SpaceListingCard({
               <span className="text-xs md:text-sm font-semibold mr-1 bg-inherit">
                 Room Price
               </span>
-              <span className="text-xs md:text-sm">{UserData.leaselength}</span>
+              <span className="text-xs md:text-sm">{SpaceData.leaselength}</span>
             </div>
             <div>
               <div className="flex flex-row items-center">
