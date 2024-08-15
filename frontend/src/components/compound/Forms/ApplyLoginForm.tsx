@@ -6,6 +6,8 @@ type formData = {
     email: string;
     lookingFor: string;
     roommates: string;
+    reason: string;
+    referral: string;
 }
 const ApplyLoginForm = ({ onSubmit }: { onSubmit: (formData: formData) => void }) => {
     const [formData, setFormData] = useState({
@@ -23,7 +25,6 @@ const ApplyLoginForm = ({ onSubmit }: { onSubmit: (formData: formData) => void }
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const { name, value } = e.target;
         setFormData({ ...formData, [name]: value });
-        console.log(formData);
     };
 
     const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
@@ -82,7 +83,7 @@ const ApplyLoginForm = ({ onSubmit }: { onSubmit: (formData: formData) => void }
                 <div className="flex flex-col">
                     <label className="text-lg font-normal"> What's your email address? *</label>
                     <input
-                        type="text"
+                        type="email"
                         name="email"
                         value={formData.email}
                         onChange={handleChange}
