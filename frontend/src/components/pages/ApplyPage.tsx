@@ -1,9 +1,13 @@
 import ApplyLoginForm from "../compound/Forms/ApplyLoginForm";
+import { useNavigate } from "react-router-dom";
 
 const ApplyPage = () => {
 
+    const navigate = useNavigate();
+
     const handleSubmit = (formData: any) => {
         console.log(formData);
+        navigate("/login");
     }
 
     return (
@@ -20,8 +24,9 @@ const ApplyPage = () => {
                 </div>
             </div>
             {/* form */}
-            <ApplyLoginForm onSubmit={handleSubmit} />
-
+            <div className="bg-[#F7F7F7] h-full p-8 flex flex-col items-center w-screen">
+                <ApplyLoginForm onSubmit={handleSubmit} />
+            </div>
         </div>
     )
 }
