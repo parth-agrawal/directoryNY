@@ -4,6 +4,8 @@ import { UserListingType } from "../../lib/services/User-Listing/types";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ContactMe from "../helper/ContactMe";
 import { SpaceListing } from "../../lib/services/Space-Listing/types";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 //https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg
 
@@ -28,14 +30,15 @@ export default function SpaceListingCard({
             <span className="font-semibold">{"NAME"}</span>
             <div className="flex gap-4">
               <div className="flex">
-                <img className="mr-1" src="/location.svg"></img>
-                <p id="location" class="text-sm md:text-md truncate">
-                  SF - Other
+                {/* <img className="mr-1 " src="src/assets/twopeople.svg"></img> */}
+                <LocationOnOutlinedIcon />
+                <p id="location" className="text-sm md:text-md truncate">
+                  {SpaceData.location}
                 </p>
               </div>
               <div className="flex">
-                <img className="mr-1" src="/threepeople.svg" />
-                <p className="text-sm md:text-md">3</p>
+                <PeopleOutlineIcon />
+                <p className="text-sm md:text-md">{SpaceData.housemates}</p>
               </div>
             </div>
             {/* twitter handle with icon */}

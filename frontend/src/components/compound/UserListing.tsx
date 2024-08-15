@@ -32,9 +32,11 @@ export default function UserListing({
                 <TwitterIcon fontSize="small" />
               </span>
             </span>
-            <button className="bg-[#1D462F] text-white rounded-3xl ring-offset-white font-semibold p-2 text-xs">
-              Contact me
-            </button>
+            <ContactMe
+              phone={UserData.phone}
+              email={UserData.email}
+              twitter_url={undefined}
+            />
           </div>
         </div>
         <div className="flex flex-col">
