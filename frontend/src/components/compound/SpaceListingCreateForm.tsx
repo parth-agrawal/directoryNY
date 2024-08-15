@@ -1,20 +1,25 @@
 import { useEffect, useState } from "react"
 import { SpaceListingInput } from "../../lib/services/Space-Listing/types"
 import SpaceListingService from "../../lib/services/Space-Listing/service"
+import { UserService } from "../../lib/services/Users/service"
+import { User } from "../../lib/services/Users/types"
 
 export const SpaceListingCreateForm = () => {
+
+    const [currentUser, setCurrentUser] = useState<User>()
+
+
+
     // const userService = useUserService()
-
-    const [userId, setUserId] = useState<string | null>(null)
-
-
+    const userService = UserService()
 
     useEffect(() => {
         const fetchUser = async () => {
-            // const user = await userService.getCurrentUser()
-            const user = { id: 'clzrcg4850000gwwz9cj69iyr' } // dummy til useUser is fixed
-            setUserId(user?.id || null)
-            setFormData(prevData => ({ ...prevData, user_id: user?.id || '' }))
+            const userResponse = await userService.getCurrentUser()
+            const user = userResponse.data
+            if (!user) return
+            setCurrentUser(user)
+            setFormData(prevData => ({ ...prevData, user_id: user.id || '' }))
             console.log(user, 'here')
         }
         fetchUser()

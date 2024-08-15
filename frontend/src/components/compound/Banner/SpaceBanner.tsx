@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { UserService } from "../../../lib/services/Users/service";
 import SpaceListingService from "../../../lib/services/Space-Listing/service";
 import { SpaceListing } from "../../../lib/services/Space-Listing/types";
-import { User } from "../../../lib/services/users/types";
+import { User } from "../../../lib/services/Users/types";
 import { SpaceListingCreateForm } from "../SpaceListingCreateForm";
 
 const SpaceBanner = () => {
@@ -58,6 +58,7 @@ const SpaceBanner = () => {
       <div className="text-sm lg:text-base ">
         Add your space to be discovered by people looking for housing.
       </div>
+
       {currentUser ? (
         userSpaceListings.length > 0 ? (
           <EditSpaceArea />
