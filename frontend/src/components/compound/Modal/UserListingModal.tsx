@@ -1,8 +1,9 @@
 'use client'
 
 import { useState } from 'react'
-import { Dialog, DialogBackdrop, DialogPanel, DialogTitle } from '@headlessui/react'
-import { ExclamationTriangleIcon } from '@heroicons/react/24/outline'
+import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
+import { UserListingInput } from '../../../lib/services/User-Listing/types'
+import UserListingService from '../../../lib/services/User-Listing/service'
 
 
 interface UserListingModalProps {
@@ -11,13 +12,16 @@ interface UserListingModalProps {
 }
 
 const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
-    const [formData, setFormData] = useState({
-        bio: '',
-        housingType: '',
-        moveInDate: '',
-        housemates: '',
-        link: '',
+    const [formData, setFormData] = useState<UserListingInput>({
+        user_id: 'erm i dont have this',
+        leaselength: '',
+        moveInTime: '',
+        housematesCount: '',
+        description: '',
+        website: '',
         phone: '',
+        email: '',
+
     })
 
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
@@ -27,6 +31,8 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
 
     const handleSubmit = (e: React.FormEvent) => {
         e.preventDefault();
+        const userListingService = UserListingService();
+        userListingService.create(formData);
         // TODO: 
         // what to do with this data? 
         console.log('Submitted:', { formData });
@@ -59,9 +65,8 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                     <label className='text-xs text-gray-500'>
                                         Bio
                                         <textarea
-                                            type="text"
-                                            name='bio'
-                                            value={formData.bio}
+                                            name='description'
+                                            value={formData.description}
                                             onChange={handleChange}
                                             className='border p-2 rounded mb-4 w-full text-xs'
                                             placeholder="What are you working on? What is important to you? What type of environment do you want to live in?" />
@@ -74,9 +79,9 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                         <label>
                                             <input
                                                 type="radio"
-                                                name='housingType'
+                                                name='leaselength'
                                                 value="1-year lease"
-                                                checked={formData.housingType === '1-year lease'}
+                                                checked={formData.leaselength === '1-year lease'}
                                                 onChange={handleChange}
                                             />
                                             1-year lease
@@ -84,9 +89,9 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                         <label className="">
                                             <input
                                                 type="radio"
-                                                name='housingType'
+                                                name='leaselength'
                                                 value="Short-term stay"
-                                                checked={formData.housingType === 'Short-term stay'}
+                                                checked={formData.leaselength === 'Short-term stay'}
                                                 onChange={handleChange}
                                             />
                                             Short-term stay
@@ -98,30 +103,30 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                     <div className="mb-4 flex flex-col gap-2 mt-2">
                                         <label>
                                             <input
-                                                name='moveInDate'
+                                                name='moveInTime'
                                                 type="radio"
                                                 value="ASAP"
-                                                checked={formData.moveInDate === 'ASAP'}
+                                                checked={formData.moveInTime === 'ASAP'}
                                                 onChange={handleChange}
                                             />
                                             ASAP
                                         </label>
                                         <label className="">
                                             <input
-                                                name='moveInDate'
+                                                name='moveInTime'
                                                 type="radio"
                                                 value="<3 months"
-                                                checked={formData.moveInDate === '<3 months'}
+                                                checked={formData.moveInTime === '<3 months'}
                                                 onChange={handleChange}
                                             />
                                             {`<3 months`}
                                         </label>
                                         <label className="">
                                             <input
-                                                name='moveInDate'
+                                                name='moveInTime'
                                                 type="radio"
                                                 value="3+ months"
-                                                checked={formData.moveInDate === '3+ months'}
+                                                checked={formData.moveInTime === '3+ months'}
                                                 onChange={handleChange}
                                             />
                                             3+ months
@@ -133,40 +138,40 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                     <div className="mb-4 flex flex-col gap-2 mt-2">
                                         <label>
                                             <input
-                                                name='housemates'
+                                                name='housematesCount'
                                                 type="radio"
                                                 value="1-2"
-                                                checked={formData.housemates === '1-2'}
+                                                checked={formData.housematesCount === '1-2'}
                                                 onChange={handleChange}
                                             />
                                             1-2
                                         </label>
                                         <label className="">
                                             <input
-                                                name='housemates'
+                                                name='housematesCount'
                                                 type="radio"
                                                 value="3-5"
-                                                checked={formData.housemates === '3-5'}
+                                                checked={formData.housematesCount === '3-5'}
                                                 onChange={handleChange}
                                             />
                                             3-5
                                         </label>
                                         <label className="">
                                             <input
-                                                name='housemates'
+                                                name='housematesCount'
                                                 type="radio"
                                                 value="6-12"
-                                                checked={formData.housemates === '6-12'}
+                                                checked={formData.housematesCount === '6-12'}
                                                 onChange={handleChange}
                                             />
                                             6-12
                                         </label>
                                         <label className="">
                                             <input
-                                                name='housemates'
+                                                name='housematesCount'
                                                 type="radio"
                                                 value="12+"
-                                                checked={formData.housemates === '12+'}
+                                                checked={formData.housematesCount === '12+'}
                                                 onChange={handleChange}
                                             />
                                             12+
@@ -178,8 +183,8 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                         <span>Link that best describes you (Optional)</span>
                                         <input
                                             type="text"
-                                            name='link'
-                                            value={formData.link}
+                                            name='website'
+                                            value={formData.website || ''}
                                             onChange={handleChange}
                                             className='border p-2 rounded mb-4 w-full text-xs'
                                             placeholder="gwern.net" />
@@ -192,7 +197,7 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                         <input
                                             type="text"
                                             name='phone'
-                                            value={formData.phone}
+                                            value={formData.phone || ''}
                                             onChange={handleChange}
                                             className='border p-2 rounded mb-4 w-full text-xs'
                                             placeholder="123-456-7890" />
@@ -205,14 +210,14 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
                                         <input
                                             type="text"
                                             name='email'
-                                            value={formData.email}
+                                            value={formData.email || ''}
                                             onChange={handleChange}
                                             className='border p-2 rounded mb-4 w-full text-xs'
                                             placeholder="example@example.com" />
                                     </div>
                                 </section>
                                 <div className="flex justify-start">
-                                    <button disabled={!formData.bio || !formData.housingType || !formData.moveInDate || !formData.housemates} type="submit" className="bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded">Submit</button>
+                                    <button disabled={!formData.description || !formData.leaselength || !formData.moveInTime || !formData.housematesCount} type="submit" className="bg-blue-500 disabled:bg-gray-500 text-white p-2 rounded">Submit</button>
                                 </div>
                             </form>
                         </DialogPanel>
