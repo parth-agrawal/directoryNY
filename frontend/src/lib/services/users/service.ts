@@ -7,5 +7,5 @@ export const UserService = (): IUserService => ({
   create: (user: User): Response<{ user: User }> => api.post(EP.users.createUser, user),
   update: (userId: string, user: User): Response<{ user: User }> => api.put(EP.users.updateUser(userId), user),
   delete: (userId: string): Response<{ user: User }> => api.delete(EP.users.deleteUser(userId)),
-  getCurrentUser: (): Response<{ user: User }> => api.get(EP.users.getCurrentUser),
+  getCurrentUser: (): Response<User> => api.get(EP.users.getCurrentUser),
 })
