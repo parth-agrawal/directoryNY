@@ -34,10 +34,10 @@ export type User = {
   referredByUser: User | null;
 };
 export interface IUserService {
-  getById: (userId: string) => Response<{ user: User }>;
-  getAll: () => Response<{ users: User[] }>;
-  create: (user: User) => Response<{ user: User }>;
-  update: (userId: string, user: User) => Response<{ user: User }>;
-  delete: (userId: string) => Response<{ user: User }>;
+  getById: (userId: string) => Response<User>;
+  getAll: () => Response<User[]>;
+  create: (user: User) => Response<User>;
+  update: (userId: string, user: User) => Response<User>;
+  delete: (userId: string) => Response<User>;
   getCurrentUser: () => Response<User>;
 }
