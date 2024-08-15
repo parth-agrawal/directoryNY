@@ -8,7 +8,7 @@ import PeopleListingSection from "./components/pages/PeopleListingSection.tsx";
 import { SpaceListingPage } from "./components/pages/SpaceListingPage.tsx";
 import MainLayout from "./components/layouts/MainLayout.tsx";
 import { Login } from "./components/pages/Login.tsx";
-import Test from "./Test.tsx";
+import UnprotectedHomepage from "./components/pages/UnprotectedHomepage.tsx";
 import UnprotectedLayout from "./components/layouts/UnprotectedLayout.tsx";
 
 const router = createBrowserRouter([
@@ -36,7 +36,7 @@ const router = createBrowserRouter([
     children: [
       {
         index: true,
-        element: <Test />
+        element: <UnprotectedHomepage />
       },
 
     ]
