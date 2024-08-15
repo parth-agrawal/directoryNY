@@ -1,5 +1,7 @@
 import UnprotectedNavbar from "../compound/NavBar/UnprotectedNavbar";
 import { useNavigate } from "react-router-dom";
+import SignInButton from "../compound/SignInbutton";
+
 
 const UnprotectedHomepage = () => {
     const navigate = useNavigate();
@@ -20,7 +22,9 @@ const UnprotectedHomepage = () => {
                 </h1>
                 <span className="text-center text-gray-600 text-md sm:text-lg lg:text-xl">The SF housing directory of people you probably know</span>
                 <button onClick={() => navigate("/login/apply")} className="bg-darkGreen text-white px-12 py-3 rounded-3xl text-xl">Apply</button>
-                <span className="text-center text-gray-400 text-md sm:text-lg lg:text-xl">Have an account? Sign in</span>
+                <span className="text-center text-gray-400 text-md sm:text-lg lg:text-xl">Have an account?
+                    <SignInButton />
+                </span>
 
                 <div className="flex text-center gap-2 md:gap-4 border border-gray-300 rounded-3xl p-4 mt-8 text-sm">
                     <span><span className="text-blue-400 font-bold">1412</span> members of DirectorySF</span>
