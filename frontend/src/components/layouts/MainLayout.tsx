@@ -1,9 +1,23 @@
-import { Navigate, Outlet } from "react-router-dom"
+import { Outlet, useNavigate } from "react-router-dom"
 import NavBar from "../compound/NavBar/NavBar"
+import { UserService } from "../../lib/services/users/service";
+import { useEffect } from "react";
 
 const MainLayout: React.FC = () => {
+    const navigate = useNavigate();
 
-    // return <Navigate to="/login" />
+
+    useEffect(() => {
+        (async () => {
+            try {
+                await UserService().getCurrentUser(); // Use the instance to call the method
+
+            } catch (error) {
+                console.error("Error fetching current user:", error); // Log the error
+                navigate('/login');
+            }
+        })();
+    }, []);
 
     return (
         <div>
