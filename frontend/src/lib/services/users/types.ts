@@ -39,5 +39,5 @@ export interface IUserService {
   create: (user: User) => Response<User>;
   update: (userId: string, user: User) => Response<User>;
   delete: (userId: string) => Response<User>;
-  getCurrentUser: () => Response<User>;
-}
+  getCurrentUser: () => Response<User | null>;
+
