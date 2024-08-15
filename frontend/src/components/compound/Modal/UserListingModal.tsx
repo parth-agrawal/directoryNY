@@ -13,7 +13,7 @@ interface UserListingModalProps {
 
 const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
     const [formData, setFormData] = useState<UserListingInput>({
-        user_id: 'erm i dont have this',
+        // user_id: 'erm i dont have this',
         leaselength: '',
         moveInTime: '',
         housematesCount: '',
