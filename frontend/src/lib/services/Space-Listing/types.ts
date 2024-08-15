@@ -6,10 +6,10 @@ export type SpaceListing = {
     location: string;
     housemates: string;
     priceRange: string;
-    website: string | null;
-    image: string | null;
-    phone: string | null;
-    email: string | null;
+    website?: string;
+    image?: string;
+    phone?: string;
+    email?: string;
 }
 
 export type SpaceListingInput = Omit<SpaceListing, 'id'>
