@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react"
-import { UserService } from "../../lib/services/users/service"
+import { UserService } from "../../lib/services/Users/service"
 import { SpaceListing, SpaceListingInput } from "../../lib/services/Space-Listing/types"
 import SpaceListingService from "../../lib/services/Space-Listing/service"
 import { SpaceListingCreateForm } from "./SpaceListingCreateForm"
 import SpaceBanner from "./Banner/SpaceBanner"
-import { User } from "../../lib/services/users/types"
+import { User } from "../../lib/services/Users/types"
 import api, { EP } from "../../../network/api"
 
 export const CreateSpaceListingArea = () => {

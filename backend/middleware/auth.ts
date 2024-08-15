@@ -13,15 +13,6 @@ const app = admin.initializeApp({
   credential: admin.credential.cert(serviceAccountKey as admin.ServiceAccount),
 });
 
-interface RequestWithDetails extends Request {
-  userFirebaseId: string;
-  userTwitterDetails: {
-    displayName: string;
-    profilePicture: string;
-  };
-}
-
-
 export const requireAuth = async (req: Request, res: Response, next: NextFunction) => {
   const token = req.headers.authorization?.split(" ")[1];
   if (!token) {
@@ -51,7 +42,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
 
 
   try {
-    const user = await UserService().getUserByFirebaseId({ firebaseId })
+    const user = await UserService().getUserByFirebaseId(firebaseId)
     if (user) {
       req["user"] = user;
       next();
@@ -64,7 +55,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
         referredId: null,
         firebaseId: firebaseId
       }
-      const createdUser = await UserService().createUser({ newUser })
+      const createdUser = await UserService().createUser(newUser)
       req["user"] = createdUser
       next();
 
