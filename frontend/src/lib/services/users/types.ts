@@ -24,14 +24,14 @@ export type Response<T> = Promise<{ data: T; error: string }>;
 
 export type User = {
   id: string;
-  createdAt: string;
-  updatedAt: string;
-  name: string;
-  clerkId: string;
-  referredByUser?: string;
-  twitterDisplay: string;
+  createdAt: Date;
+  updatedAt: Date;
+  displayName: string;
   twitterHandle: string;
-  twitterPhoto: string;
+  profilePicture: string;
+  firebaseId: string | null;
+  referredId: string | null;
+  referredByUser: User | null;
 };
 export interface IUserService {
   getById: (userId: string) => Response<{ user: User }>;
@@ -39,4 +39,5 @@ export interface IUserService {
   create: (user: User) => Response<{ user: User }>;
   update: (userId: string, user: User) => Response<{ user: User }>;
   delete: (userId: string) => Response<{ user: User }>;
+  getCurrentUser: () => Response<User>;
 }

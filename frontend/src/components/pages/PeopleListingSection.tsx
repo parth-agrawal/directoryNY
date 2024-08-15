@@ -239,9 +239,8 @@ export default function PeopleListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                    ? -1
-                    : 0
-
+                  ? -1
+                  : 0
               )
               .filter(
                 (f) =>
@@ -254,9 +253,9 @@ export default function PeopleListingSection() {
                   (leaselengthpreference === default_values[0] ||
                     leaselengthpreference === f.leaselength) &&
                   (leaseroommatereference === default_values[1] ||
-                    leaseroommatereference === f.leaselength) &&
+                    leaseroommatereference === f.housematesCount) &&
                   (leasetimingpreference === default_values[2] ||
-                    leasetimingpreference === f.leaselength)
+                    leasetimingpreference === f.moveInTime)
                 );
               })
               .map((listing) => (

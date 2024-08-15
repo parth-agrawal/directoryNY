@@ -53,7 +53,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
   try {
     const user = await UserService().getUserByFirebaseId({ firebaseId })
     if (user) {
-      req["userId"] = user.id;
+      req["user"] = user;
       next();
     } else {
       // User doesn't exist, create a new user
@@ -65,7 +65,7 @@ export const userMiddleware = async (req: Request, res: Response, next: NextFunc
         firebaseId: firebaseId
       }
       const createdUser = await UserService().createUser({ newUser })
-      req["userId"] = createdUser.id;
+      req["user"] = createdUser
       next();
 
     }

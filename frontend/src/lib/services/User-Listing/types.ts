@@ -1,15 +1,15 @@
 export type UserListingType = {
   id: string;
-  createdAt: string;
-  updatedAt: string;
+  createdAt: Date;
+  updatedAt: Date;
   user_id: string;
-  phone?: string;
-  email?: string;
-  description: string;
-  moveInTime: string;
   leaselength: string;
+  moveInTime: string;
   housematesCount: string;
-  website: string;
+  description: string;
+  website: string | null;
+  phone: string | null;
+  email: string | null;
 };
 
 export type UserListingInput = Omit<
