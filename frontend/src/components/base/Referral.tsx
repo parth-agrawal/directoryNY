@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCopy, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { api } from "../../../network/api";
+import { UserService } from '../../lib/services/Users/service';
 
 interface ReferralProps {
     onClose: () => void;
@@ -15,13 +16,15 @@ const Referral: React.FC<ReferralProps> = ({ onClose }) => {
 
     useEffect(() => {
         fetchReferralCode();
+
     }, []);
 
     const fetchReferralCode = async () => {
         try {
-
-            const userId = 'current-user-id'; // This should be replaced with actual user ID
+            const userResponse = await UserService().getCurrentUser();
+            const userId = userResponse.data.id;
             const response = await api.get(`/referral/code/${userId}`);
+            console.log(response.data);
             setReferralCode(response.data.referralCode);
             setLoading(false);
         } catch (error) {

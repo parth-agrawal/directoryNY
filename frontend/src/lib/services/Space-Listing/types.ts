@@ -12,6 +12,13 @@ export type SpaceListing = {
   image?: string;
   phone?: string;
   email?: string;
+  twitter_url?: string;
+  leaselength: string;
+  twitter_handle: string;
+  referrer_image?: string;
+  referrer_name: string;
+  room_price: string;
+  referrer_twitter_url: string;
 }
 
 export type SpaceListingInput = Omit<

@@ -1,20 +1,16 @@
 import { useEffect, useState } from "react";
-import { UserService } from "../../../lib/services/Users/service";
+import { UserService } from "../../../lib/services/users/service";
 import SpaceListingService from "../../../lib/services/Space-Listing/service";
 import { SpaceListing } from "../../../lib/services/Space-Listing/types";
-import { User } from "../../../lib/services/Users/types";
+import { User } from "../../../lib/services/users/types";
 import { SpaceListingCreateForm } from "../SpaceListingCreateForm";
 
 const SpaceBanner = () => {
-
-
 
   const userService = UserService();
   const [userSpaceListings, setUserSpaceListings] = useState<SpaceListing[]>([]);
 
   const [currentUser, setCurrentUser] = useState<User>()
-
-
 
   useEffect(() => {
     const fetchUserAndListings = async () => {
@@ -42,15 +38,10 @@ const SpaceBanner = () => {
     fetchUserAndListings();
   }, []);
 
-  // const user = useUserService()
   const [createFormVisible, setCreateFormVisible] = useState(false)
-  // if (user.createdSpaces.length > 0) {
-  //     setHasCreatedSpace(true)
-  // } // replace with real data
 
   const handleCreateSpaceClick = () => {
-    setCreateFormVisible(true)
-    // update user data
+    setCreateFormVisible(!createFormVisible)
   }
 
   return (
@@ -62,34 +53,46 @@ const SpaceBanner = () => {
         Add your space to be discovered by people looking for housing.
       </div>
 
-      {currentUser ? (
+      {currentUser && (
         userSpaceListings.length > 0 ? (
           <EditSpaceArea />
         ) : (
-          <SpaceListingCreateButton clickHandler={handleCreateSpaceClick} />
+          <>
+            <SpaceListingCreateButton
+              clickHandler={handleCreateSpaceClick}
+              isFormVisible={createFormVisible}
+            />
+            {createFormVisible && <SpaceListingCreateForm onSuccess={handleCreateSpaceClick} />}
+          </>
         )
-      ) : null}
-      {createFormVisible ? <SpaceListingCreateForm /> : null}
-
+      )}
     </div>
   );
 };
 
 
-const SpaceListingCreateButton = ({ clickHandler }: { clickHandler: () => void }) => {
+const SpaceListingCreateButton = ({
+  clickHandler,
+  isFormVisible
+}: {
+  clickHandler: () => void,
+  isFormVisible: boolean
+}) => {
   return (
-    <button onClick={clickHandler}>
-      Add your space
+    <button
+      onClick={clickHandler}
+      className="bg-[#4CAF50] hover:bg-[#45a049] text-white font-bold py-2 px-4 rounded transition duration-300 ease-in-out"
+    >
+      {isFormVisible ? 'Close form' : 'Add your space'}
     </button>
   )
 }
 
 
-
 const EditSpaceArea = () => {
   return (
     <div>
-      Edit
+      Edit your listing
     </div>
   )
 }

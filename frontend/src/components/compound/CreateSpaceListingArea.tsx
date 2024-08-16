@@ -1,16 +1,14 @@
-import SpaceBanner from "./Banner/SpaceBanner"
+import React from 'react';
+import { SpaceListingCreateForm } from './SpaceListingCreateForm';
 
-export const CreateSpaceListingArea = () => {
-
-
-
-    return (
-        <div>
-            <SpaceBanner />
-
-
-        </div>
-    )
-
+interface CreateSpaceListingAreaProps {
+    onNewListing: () => void;
 }
 
+export const CreateSpaceListingArea: React.FC<CreateSpaceListingAreaProps> = ({ onNewListing }) => {
+    return (
+        <div>
+            <SpaceListingCreateForm onSuccess={onNewListing} />
+        </div>
+    );
+};
