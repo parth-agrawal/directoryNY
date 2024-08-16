@@ -4,6 +4,7 @@ import { useCallback, useEffect, useState } from "react";
 // import { UserListingProps, UserListingType } from "../types";
 import { UserListingType } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
+import { LeaseLength, RoommateCount, MovingTimeline } from "./types";
 
 import { userlistings } from "../../userlistings";
 
@@ -37,8 +38,7 @@ export default function PeopleListingSection() {
 
   const handleListingAdded = () => {
     fetchListings();
-  }
-
+  };
 
   const default_values: [string, string, string] = [
     "Any lease",
@@ -184,20 +184,14 @@ export default function PeopleListingSection() {
           <div className="flex flex-row gap-2">
             <SelectFilter
               name="Lease length"
-              options={["1-year Lease", "Short-term Lease", default_values[0]]}
+              options={[...Object.values(LeaseLength), default_values[0]]}
               selected={leaselengthpreference}
               defaultval={default_values[0]}
               changeHandler={(e) => setLeaselengthpreference(e.target.value)}
             />
             <SelectFilter
               name="Housemate Count"
-              options={[
-                "1-2 housemates",
-                "3-5 housemates",
-                "6-12 housemates",
-                "12+ housemates",
-                default_values[1],
-              ]}
+              options={[...Object.values(RoommateCount), default_values[1]]}
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
@@ -220,7 +214,7 @@ export default function PeopleListingSection() {
           </label>
           <SelectFilter
             name="Moving in..."
-            options={["ASAP", "<3 months", "3+ months", default_values[2]]}
+            options={[...Object.values(MovingTimeline), default_values[2]]}
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
