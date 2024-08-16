@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getAuth } from "firebase/auth";
-import { useAuthState } from 'react-firebase-hooks/auth';
 import firebaseApp from "../src/firebase";
 
 export const EP = {
@@ -26,7 +25,7 @@ export const EP = {
   referrals: {
     getReferralCode: (userId: string) => `/referral/code/${userId}`,
     applyReferralCode: "/referral/apply",
-    getReferralStatus: (referralId: string) => `/referral/status/${referralId}`
+    getReferralStatus: (referralId: string) => `/referral/status/${referralId}`,
   },
   users: {
     getAllUsers: "/users/all",
@@ -47,29 +46,32 @@ export const api = axios.create({
   },
 });
 
+api.interceptors.request.use(
+  async (config) => {
+    await getAuth(firebaseApp).authStateReady();
+    const token = await getAuth(firebaseApp).currentUser?.getIdToken();
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`;
+      console.log("Authorization header set");
+    } else {
+      console.log("No token available, request will be unauthorized");
+    }
 
-
-
-api.interceptors.request.use(async (config) => {
-  const token = sessionStorage.getItem('firebaseUserToken');
-  if (token) {
-    config.headers.Authorization = `Bearer ${token}`;
-    console.log("Authorization header set");
-  } else {
-    console.log("No token available, request will be unauthorized");
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
   }
-
-  return config;
-}, (error) => {
-  return Promise.reject(error);
-});
+);
 
 // Referral-related API functions
 export const referralApi = {
-  getReferralCode: (userId: string) => api.get(EP.referrals.getReferralCode(userId)),
+  getReferralCode: (userId: string) =>
+    api.get(EP.referrals.getReferralCode(userId)),
   applyReferralCode: (newUserId: string, referralCode: string) =>
     api.post(EP.referrals.applyReferralCode, { newUserId, referralCode }),
-  getReferralStatus: (referralId: string) => api.get(EP.referrals.getReferralStatus(referralId))
-}
+  getReferralStatus: (referralId: string) =>
+    api.get(EP.referrals.getReferralStatus(referralId)),
+};
 
 export default api;
