@@ -229,7 +229,7 @@ export default function PeopleListingSection() {
                 );
               })
               .map((listing) => (
-                <UserListing key={listing.id} UserData={listing} />
+                <UserListing key={listing.id} UserListingData={listing} />
               ))}
           </div>
         </>
