@@ -12,6 +12,8 @@ export type SpaceListing = {
   image?: string;
   phone?: string;
   email?: string;
+  twitter_url?: string;
+  leaselength: string;
 }
 
 export type SpaceListingInput = Omit<
