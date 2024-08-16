@@ -19,10 +19,12 @@ export default function NavBar() {
 
   return (
     <nav className="top-0 left-0 right-0 bg-primary">
-      <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+      <div className="mx-auto px-4 py-2 flex justify-between items-center">
         {/* Directory NY logo */}
-        <div className="flex-shrink-0">
-          <span className="text-xl font-bold">Directory NY</span>
+        <div className="flex-shrink-0 ml-6">
+          <span className="text-xl font-bold text-blue-950 font-serif">
+            DirectoryNY
+          </span>
         </div>
         <div className="flex items-center space-x-4">
           <button
@@ -43,8 +45,8 @@ export default function NavBar() {
         </div>
       </div>
       <div className="border-t border-b border-gray-200">
-        <div className="container mx-auto px-4">
-          <div className="flex space-x-4 py-3">
+        <div className="mx-auto px-4">
+          <div className="flex space-x-4 py-3 px-6">
             <Link to="/" className={getLinkClass("/")}>
               People
             </Link>
