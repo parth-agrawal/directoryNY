@@ -1,7 +1,13 @@
 import React, { useState } from 'react';
 import UserListingModal from '../Modal/UserListingModal'; // Adjust the import path
 
-const ProfileBanner = () => {
+
+interface ProfileBannerProps {
+    onListingAdded: () => void;
+}
+
+
+const ProfileBanner = ({ onListingAdded }: ProfileBannerProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
 
     const openModal = () => {
@@ -26,6 +32,7 @@ const ProfileBanner = () => {
             {isModalOpen && (
                 <UserListingModal
                     onClose={closeModal}
+                    onSubmitSuccess={onListingAdded}
                 />
             )}
         </div>

@@ -8,10 +8,10 @@ import { User } from '../../../lib/services/Users/types';
 
 interface UserListingModalProps {
     onClose: () => void;
-
+    onSubmitSuccess: () => void;
 }
 
-const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
+const UserListingModal: React.FC<UserListingModalProps> = ({ onClose, onSubmitSuccess }) => {
 
     const [currentUser, setCurrentUser] = useState<User>()
 
@@ -50,14 +50,17 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
         console.log('form', formData)
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const userListingService = UserListingService();
-        userListingService.create(formData);
-        // TODO: 
-        // what to do with this data? 
-        console.log('Submitted:', { formData });
-        userListingService.create(formData);
+        try {
+            await userListingService.create(formData);
+            console.log('Submitted:', { formData });
+            onSubmitSuccess();
+            onClose();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
 
         onClose();
     };
