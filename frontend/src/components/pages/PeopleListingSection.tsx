@@ -2,11 +2,10 @@
 import UserListing from "../compound/UserListing";
 import { useCallback, useEffect, useState } from "react";
 // import { UserListingProps, UserListingType } from "../types";
-import { UserListingDisplayData, UserListingType } from "../../lib/services/User-Listing/types";
+import { UserListingDisplayData } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
 import { LeaseLength, RoommateCount, MovingTimeline } from "./types";
 
-import { userlistings } from "../../userlistings";
 
 import ProfileBanner from "../compound/Banner/ProfileBanner";
 
@@ -68,31 +67,6 @@ export default function PeopleListingSection() {
     ["This Month", adj_date(7), adj_date(31)],
     ["Older", adj_date(31), new Date(0)],
   ];
-  // function organizePosts(posts: Array<UserListingType>) {
-  //   const post_map = new Map();
-  //   POSTING_TIME_FRAMES.forEach((time) => post_map.set(time, []));
-  //   userlistings.forEach((value) => post_map.set(value.post_date, value));
-  //   return post_map;
-  // }
-  // console.log(organizePosts(userlistings));
-  // const TimeFrame = () => {
-  //   const post_map = organizePosts(userlistings);
-  //   console.log(post_map);
-  //   return POSTING_TIME_FRAMES.map((time) => {
-  //     console.log("time", time);
-  //     return (
-  //       <>
-  //         <div>{time}</div>
-  //         <div>Hello</div>
-  //         <div className="flex flex-row flex-wrap">
-  //           {post_map.get(time).map((listing) => (
-  //             <UserListing UserData={listing} />
-  //           ))}
-  //         </div>
-  //       </>
-  //     );
-  //   });
-  // };
 
   POSTING_TIME_FRAMES.map((frame) => {
     userlistings
