@@ -28,7 +28,7 @@ export default function PeopleListingSection() {
       .getAll()
       .then((listings) => {
         console.log("listings", listings.data.userlistings);
-        setuserListings(listings.data.userlistings);
+        setuserListings(userlistings);
       });
   }, []);
 
@@ -87,7 +87,6 @@ export default function PeopleListingSection() {
   // };
 
   POSTING_TIME_FRAMES.map((frame) => {
-    console.log("frame", frame);
     userlistings
       .sort((a, b) =>
         a.createdAt > b.createdAt
@@ -199,7 +198,7 @@ export default function PeopleListingSection() {
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
-              // defaultval="Any count"
+            // defaultval="Any count"
             />
 
             <div
@@ -222,7 +221,7 @@ export default function PeopleListingSection() {
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
-            // defaultval="Any timeline"
+          // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -239,8 +238,8 @@ export default function PeopleListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                  ? -1
-                  : 0
+                    ? -1
+                    : 0
               )
               .filter(
                 (f) =>
