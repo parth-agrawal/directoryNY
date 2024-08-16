@@ -7,9 +7,9 @@ export type UserListingType = {
   moveInTime: string;
   housematesCount: string;
   description: string;
-  website: string | null;
-  phone: string | null;
-  email: string | null;
+  website?: string;
+  phone?: string;
+  email?: string;
 };
 
 export type UserListingInput = Omit<

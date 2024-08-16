@@ -1,6 +1,6 @@
 //import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 // import { UserListingProps, UserListingType } from "../types";
 import { UserListingType } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
@@ -22,14 +22,23 @@ export default function PeopleListingSection() {
 
   console.log("people section");
   console.log("userlistingservice");
-  useEffect(() => {
+  const fetchListings = useCallback(() => {
     UserListingService()
       .getAll()
       .then((listings) => {
-        console.log("listings", listings.data.userlistings);
-        setuserListings(userlistings);
+        console.log("listings", listings.data);
+        setuserListings(listings.data);
       });
   }, []);
+
+  useEffect(() => {
+    fetchListings();
+  }, [fetchListings]);
+
+  const handleListingAdded = () => {
+    fetchListings();
+  }
+
 
   const default_values: [string, string, string] = [
     "Any lease",
@@ -161,7 +170,7 @@ export default function PeopleListingSection() {
   };
   return (
     <>
-      <ProfileBanner />
+      <ProfileBanner onListingAdded={handleListingAdded} />
 
       {/* <div className="flex flex-col gap-4 mb-4"> */}
       <div className="flex flex-row gap-2 grow">
@@ -252,7 +261,7 @@ export default function PeopleListingSection() {
                 );
               })
               .map((listing) => (
-                <UserListing UserData={listing} />
+                <UserListing key={listing.id} UserData={listing} />
               ))}
           </div>
         </>

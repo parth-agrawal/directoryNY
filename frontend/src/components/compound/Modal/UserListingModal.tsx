@@ -1,16 +1,22 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { UserListingInput } from '../../../lib/services/User-Listing/types'
 import UserListingService from '../../../lib/services/User-Listing/service'
+import { UserService } from '../../../lib/services/Users/service';
+import { User } from '../../../lib/services/Users/types';
 
 
 interface UserListingModalProps {
     onClose: () => void;
-
+    onSubmitSuccess: () => void;
 }
 
-const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
+const UserListingModal: React.FC<UserListingModalProps> = ({ onClose, onSubmitSuccess }) => {
+
+    const [currentUser, setCurrentUser] = useState<User>()
+
     const [formData, setFormData] = useState<UserListingInput>({
+        user_id: '',
         leaselength: '',
         moveInTime: '',
         housematesCount: '',
@@ -21,18 +27,41 @@ const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
 
     })
 
+
+    // const userService = useUserService()
+    const userService = UserService()
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            const userResponse = await userService.getCurrentUser()
+            const user = userResponse.data
+            if (!user) return
+            setCurrentUser(user)
+            setFormData(prevData => ({ ...prevData, user_id: user.id || '' }))
+            console.log(user, 'here')
+        }
+        fetchUser()
+    }, [])
+
+
+
     const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
         setFormData({ ...formData, [e.target.name]: e.target.value });
         console.log('form', formData)
     };
 
-    const handleSubmit = (e: React.FormEvent) => {
+    const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const userListingService = UserListingService();
-        userListingService.create(formData);
-        // TODO: 
-        // what to do with this data? 
-        console.log('Submitted:', { formData });
+        try {
+            await userListingService.create(formData);
+            console.log('Submitted:', { formData });
+            onSubmitSuccess();
+            onClose();
+        } catch (error) {
+            console.error('Error submitting form:', error);
+        }
+
         onClose();
     };
 

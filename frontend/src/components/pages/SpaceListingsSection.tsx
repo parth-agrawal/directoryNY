@@ -27,8 +27,8 @@ export default function SpaceListingSection() {
     SpaceListingService()
       .getAll()
       .then((listings) => {
-        console.log("listings", listings.data.listings);
-        setpeopleListings(listings.data.listings);
+        console.log("listings", listings.data);
+        setpeopleListings(listings.data);
       });
   }, []);
 
@@ -153,8 +153,8 @@ export default function SpaceListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                  ? -1
-                  : 0
+                    ? -1
+                    : 0
               )
               .filter(
                 (f) =>
