@@ -1,5 +1,3 @@
-'use client'
-
 import { useState } from 'react'
 import { Dialog, DialogBackdrop, DialogPanel } from '@headlessui/react'
 import { UserListingInput } from '../../../lib/services/User-Listing/types'
@@ -13,7 +11,6 @@ interface UserListingModalProps {
 
 const UserListingModal: React.FC<UserListingModalProps> = ({ onClose }) => {
     const [formData, setFormData] = useState<UserListingInput>({
-        // user_id: 'erm i dont have this',
         leaselength: '',
         moveInTime: '',
         housematesCount: '',
