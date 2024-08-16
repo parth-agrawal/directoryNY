@@ -1,4 +1,3 @@
-
 //import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { useCallback, useEffect, useState } from "react";
@@ -98,11 +97,7 @@ export default function PeopleListingSection() {
   POSTING_TIME_FRAMES.map((frame) => {
     userlistings
       .sort((a, b) =>
-        a.createdAt > b.createdAt
-          ? 1
-          : b.createdAt > a.createdAt
-            ? -1
-            : 0
+        a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
       )
       .filter((f) => {
         console.log(new Date(f.createdAt), frame);
@@ -111,8 +106,7 @@ export default function PeopleListingSection() {
           new Date(f.createdAt) > frame[2]
         );
         return (
-          new Date(f.createdAt) <= frame[1],
-          new Date(f.createdAt) > frame[2]
+          new Date(f.createdAt) <= frame[1], new Date(f.createdAt) > frame[2]
         );
       })
       .map((listing) => {
@@ -207,7 +201,7 @@ export default function PeopleListingSection() {
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
-            // defaultval="Any count"
+              // defaultval="Any count"
             />
 
             <div
@@ -230,7 +224,7 @@ export default function PeopleListingSection() {
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
-          // defaultval="Any timeline"
+            // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -238,7 +232,7 @@ export default function PeopleListingSection() {
 
       {POSTING_TIME_FRAMES.map((frame) => (
         <>
-          <div className="font-bold text-lg pl-2 mt-4">
+          <div className="font-bold text-2xl pl-2 mt-4">
             {frame[0] as string}
           </div>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6">
@@ -247,8 +241,8 @@ export default function PeopleListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                    ? -1
-                    : 0
+                  ? -1
+                  : 0
               )
               .filter(
                 (f) =>

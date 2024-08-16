@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import UserListingModal from '../Modal/UserListingModal'; // Adjust the import path
+import React, { useState } from "react";
+import UserListingModal from "../Modal/UserListingModal"; // Adjust the import path
 
 
 interface ProfileBannerProps {
@@ -10,13 +10,14 @@ interface ProfileBannerProps {
 const ProfileBanner = ({ onListingAdded }: ProfileBannerProps) => {
     const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
 
-    const openModal = () => {
-        setIsModalOpen(true); // Function to open the modal
-    };
 
-    const closeModal = () => {
-        setIsModalOpen(false); // Function to close the modal
-    };
+  const openModal = () => {
+    setIsModalOpen(true); // Function to open the modal
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false); // Function to close the modal
+  };
 
     return (
         <div className="flex flex-col p-4 border border-2 rounded-lg bg-[#F5F8F7] gap-2 m-6">
@@ -37,6 +38,7 @@ const ProfileBanner = ({ onListingAdded }: ProfileBannerProps) => {
             )}
         </div>
     );
+
 };
 
 export default ProfileBanner;

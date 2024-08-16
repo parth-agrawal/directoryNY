@@ -55,28 +55,12 @@ export default function App() {
 
   return (
     <header>
-      <ContactMe
-        phone="1000000000"
-        email="email@gmail.com"
-        twitter="elonmusk"
-      />
       <div>
         <NavBar />
       </div>
       <div className="bg-grid-blue-300/[0.2]">
         <PeopleListingSection />
       </div>
-
-      <div className="flex flex-col">
-        <div className="flex flex-row bg-[#FEFBEB]">
-          <button className="no-underline rounded-md py-1.5 px-3 text-[#474747] border border-[#cccccc]  hover:bg-[#f1efdf]">
-            Rooms
-          </button>
-          <button className="no-underline rounded-md py-1.5 px-3 font-bold text-[#1d462f] border-2 hover:border-[#1d462f] bg-transparent hover:bg-[#e7e9d8]">
-
-          </button>
-        </div>
-
         <CreateSpaceListingArea />
       </div>
     </header>
