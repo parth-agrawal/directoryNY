@@ -22,14 +22,17 @@ const SpaceBanner = () => {
         const userResponse = await userService.getCurrentUser();
         if (!userResponse.data) return;
         setCurrentUser(userResponse.data);
-        if (currentUser) {
+        if (userResponse.data) {
           const listingsResponse = await SpaceListingService().getAll();
           if (listingsResponse.data) {
-            const userListings = listingsResponse.data.filter(
-              listing => listing.user_id === currentUser.id
-            );
+            const userListings = listingsResponse.data?.filter(
+              listing => listing.user_id === userResponse.data?.id
+            ) ?? [];
             setUserSpaceListings(userListings);
           }
+        }
+        else {
+          throw new Error("Error fetching current user")
         }
       } catch (error) {
         console.error("Error fetching user and space listings:", error);
