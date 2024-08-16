@@ -68,15 +68,6 @@ export default function App() {
       </div>
 
       <div className="flex flex-col">
-        <div className="flex flex-row bg-[#FEFBEB]">
-          <button className="no-underline rounded-md py-1.5 px-3 text-[#474747] border border-[#cccccc]  hover:bg-[#f1efdf]">
-            People
-          </button>
-          <button className="no-underline rounded-md py-1.5 px-3 font-bold text-[#1d462f] border-2 hover:border-[#1d462f] bg-transparent hover:bg-[#e7e9d8]">
-            Rooms
-          </button>
-        </div>
-
         <CreateSpaceListingArea />
       </div>
     </header>
