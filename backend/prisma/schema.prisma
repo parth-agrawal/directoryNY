@@ -41,7 +41,7 @@ model Referral {
   id           String   @id @default(cuid())
   referrerId   String
   referrer     User     @relation(fields: [referrerId], references: [id])
-  referredUser String
+  referredUser String?
   createdAt    DateTime @default(now())
   status       String   @default("pending")
 
