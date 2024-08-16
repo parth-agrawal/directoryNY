@@ -2,7 +2,7 @@
 import UserListing from "../compound/UserListing";
 import { useCallback, useEffect, useState } from "react";
 // import { UserListingProps, UserListingType } from "../types";
-import { UserListingType } from "../../lib/services/User-Listing/types";
+import { UserListingDisplayData, UserListingType } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
 import { LeaseLength, RoommateCount, MovingTimeline } from "./types";
 
@@ -18,7 +18,7 @@ import ProfileBanner from "../compound/Banner/ProfileBanner";
 // >;
 
 export default function PeopleListingSection() {
-  const [userlistings, setuserListings] = useState<Array<UserListingType>>([]);
+  const [userlistings, setuserListings] = useState<Array<UserListingDisplayData>>([]);
   const currentDate = new Date();
 
   console.log("people section");
@@ -195,7 +195,7 @@ export default function PeopleListingSection() {
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
-              // defaultval="Any count"
+            // defaultval="Any count"
             />
 
             <div
@@ -218,7 +218,7 @@ export default function PeopleListingSection() {
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
-            // defaultval="Any timeline"
+          // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -235,8 +235,8 @@ export default function PeopleListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                  ? -1
-                  : 0
+                    ? -1
+                    : 0
               )
               .filter(
                 (f) =>
