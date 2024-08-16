@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import firebaseApp from '../../firebase';
-import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged } from "firebase/auth";
+import { getAuth, signInWithPopup, TwitterAuthProvider, User, onAuthStateChanged, setPersistence, browserLocalPersistence } from "firebase/auth";
 import { useNavigate } from 'react-router-dom';
 
 interface ReloadUserInfo {
@@ -20,6 +20,7 @@ const SignInButton = () => {
     const provider = new TwitterAuthProvider();
     const handleSignIn = async () => {
         try {
+            await setPersistence(auth, browserLocalPersistence)
             const result = await signInWithPopup(auth, provider);
             const user = result.user as ExtendedUser; // Type assertion
             const username = user.reloadUserInfo.screenName;
