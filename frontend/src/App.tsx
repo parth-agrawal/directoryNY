@@ -55,11 +55,6 @@ export default function App() {
 
   return (
     <header>
-      <ContactMe
-        phone="1000000000"
-        email="email@gmail.com"
-        twitter="elonmusk"
-      />
       <div>
         <NavBar />
       </div>
