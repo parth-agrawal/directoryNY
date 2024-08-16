@@ -1,6 +1,6 @@
 import { Outlet, useNavigate } from "react-router-dom"
 import NavBar from "../compound/NavBar/NavBar"
-import { UserService } from "../../lib/services/users/service";
+import { UserService } from "../../lib/services/Users/service";
 import { useEffect } from "react";
 
 const MainLayout: React.FC = () => {
