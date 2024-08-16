@@ -6,21 +6,21 @@ import { useEffect } from "react";
 const UnprotectedLayout: React.FC = () => {
     const navigate = useNavigate();
 
-    // useEffect(() => {
-    //     (async () => {
-    //         const userService = UserService(); // Ensure UserService has a constructor
-    //         try {
-    //             const user = await userService.getCurrentUser(); // Use the instance to call the method
-    //             if (user.data?.id) {
-    //                 navigate('/');
-    //             }
-    //         } catch (error) {
-    //             console.error("Error fetching current user:", error); // Log the error
-    //             return
-    //         }
+    useEffect(() => {
+        (async () => {
+            const userService = UserService(); // Ensure UserService has a constructor
+            try {
+                const user = await userService.getCurrentUser(); // Use the instance to call the method
+                if (user.data?.id) {
+                    navigate('/');
+                }
+            } catch (error) {
+                console.error("Error fetching current user:", error); // Log the error
+                return
+            }
 
-    //     })();
-    // }, []);
+        })();
+    }, []);
 
     return (
         <div>
