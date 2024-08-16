@@ -7,89 +7,74 @@ import { SpaceListing } from "../../lib/services/Space-Listing/types";
 import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
-//https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg
-
-export default function SpaceListingCard({
-  SpaceData,
-}: {
+interface SpaceListingCardProps {
   SpaceData: SpaceListing;
-}) {
-  return (
-    <>
-      <div className="p-4 bg-[#FFFDF3] rounded-2xl flex flex-col border-[1px] max-w-1/3 child-inherit-bg">
-        <div className="flex items-center justify-between bg-inherit">
-          <img
-            className="rounded-full w-20 h-20 lg:w-28 lg:h-28 undefined mb-2"
-            alt="Space photo"
-            src={
-              "https://www.shutterstock.com/image-photo/boat-tree-sunset-600nw-1770893537.jpg"
-            }
-          />
-          <div className="flex flex-col items-center max-w-[60%] bg-inherit">
-            <span className="font-semibold">{"NAME"}</span>
-            <div className="flex gap-4">
-              <div className="flex">
-                {/* <img className="mr-1 " src="src/assets/twopeople.svg"></img> */}
-                <LocationOnOutlinedIcon />
-                <p id="location" className="text-sm md:text-md truncate">
-                  {SpaceData.location}
-                </p>
-              </div>
-              <div className="flex">
-                <PeopleOutlineIcon />
-                <p className="text-sm md:text-md">{SpaceData.housemates}</p>
-              </div>
-            </div>
-            {/* twitter handle with icon */}
+  onListingAdded?: () => void;
+}
 
-            <span></span>
-            <ContactMe
-              phone={SpaceData.phone}
-              email={SpaceData.email}
-              twitter_url={SpaceData.twitter_url}
-            />
-          </div>
-        </div>
-        <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2">
-          @{"twitterhandle"}
-          <span className="text-blue-500 ml-0.5 ">
-            <TwitterIcon fontSize="small" />
-          </span>
-        </span>
-        <div className="flex flex-col">
-          <div className=" rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-slate-600">
-            {SpaceData.description}
-          </div>
-          {/* <div className="flex flex-row gap-2"> */}
-          <div className="text-xs md:text-sm bg-inherit">
-            <div className="bg-inherit">
-              <span className="text-xs md:text-sm font-semibold mr-1 bg-inherit">
-                Room Price
-              </span>
-              <span className="text-xs md:text-sm">{SpaceData.leaselength}</span>
+export default function SpaceListingCard({ SpaceData, onListingAdded }: SpaceListingCardProps) {
+  return (
+    <div className="p-4 bg-[#FFFDF3] rounded-2xl flex flex-col border-[1px] w-full max-w-sm h-[500px] child-inherit-bg">
+      <div className="flex items-center justify-between bg-inherit mb-4">
+        <img
+          className="rounded-full w-20 h-20 object-cover"
+          alt="Space photo"
+          src={SpaceData.image || "https://www.shutterstock.com/image-photo/boat-tree-sunset-600nw-1770893537.jpg"}
+        />
+        <div className="flex flex-col items-end max-w-[60%] bg-inherit">
+          <span className="font-semibold text-lg mb-2">{SpaceData.name}</span>
+          <div className="flex gap-4">
+            <div className="flex items-center">
+              <LocationOnOutlinedIcon fontSize="small" />
+              <p className="text-sm truncate ml-1">{SpaceData.location}</p>
             </div>
-            <div>
-              <div className="flex flex-row items-center">
-                <span className="text-xs md:text-sm font-semibold mr-1">
-                  Referred by
-                </span>
-                <a href={"twitter.com"} className="flex items-center">
-                  <img
-                    className="rounded-full w-7 h-7 undefined"
-                    alt="User profile image"
-                    src={
-                      "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"
-                    }
-                  />
-                  <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
-                    {"Referrer"}
-                  </span>
-                </a>
-              </div>
+            <div className="flex items-center">
+              <PeopleOutlineIcon fontSize="small" />
+              <p className="text-sm ml-1">{SpaceData.housemates}</p>
             </div>
           </div>
         </div>
       </div>
-    </>
+
+      <div className="flex items-center text-blue-500 text-sm mb-4">
+        <span>@{SpaceData.twitter_handle}</span>
+        <TwitterIcon fontSize="small" className="ml-1" />
+      </div>
+
+      <ContactMe
+        phone={SpaceData.phone}
+        email={SpaceData.email}
+        twitter_url={SpaceData.twitter_url}
+      />
+
+      <div className="rounded-xl text-sm p-3 bg-[#F6F5EB] my-4 text-slate-600 flex-grow overflow-y-auto">
+        {SpaceData.description}
+      </div>
+
+      <div className="text-sm bg-inherit mb-4">
+        <div className="flex justify-between">
+          <span className="font-semibold">Room Price:</span>
+          <span>{SpaceData.room_price}</span>
+        </div>
+        <div className="flex justify-between">
+          <span className="font-semibold">Lease Length:</span>
+          <span>{SpaceData.leaselength}</span>
+        </div>
+      </div>
+
+      <div className="flex items-center">
+        <span className="text-sm font-semibold mr-2">Referred by:</span>
+        <a href={SpaceData.referrer_twitter_url} className="flex items-center">
+          <img
+            className="rounded-full w-6 h-6 object-cover"
+            alt="Referrer profile image"
+            src={SpaceData.referrer_image || "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"}
+          />
+          <span className="text-blue-500 hover:text-blue-400 ml-2 text-sm">
+            {SpaceData.referrer_name}
+          </span>
+        </a>
+      </div>
+    </div>
   );
 }

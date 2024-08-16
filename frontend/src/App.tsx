@@ -61,8 +61,6 @@ export default function App() {
       <div className="bg-grid-blue-300/[0.2]">
         <PeopleListingSection />
       </div>
-        <CreateSpaceListingArea />
-      </div>
     </header>
   );
 }

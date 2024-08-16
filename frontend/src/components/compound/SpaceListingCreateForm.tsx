@@ -39,7 +39,11 @@ export const SpaceListingCreateForm: React.FC<SpaceListingCreateFormProps> = ({ 
         image: '',
         phone: '',
         email: '',
-        leaselength: ''
+        leaselength: '',
+        twitter_handle: '',
+        referrer_name: '',
+        room_price: '',
+        referrer_twitter_url: ''
     })
 
     const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -67,7 +71,11 @@ export const SpaceListingCreateForm: React.FC<SpaceListingCreateFormProps> = ({ 
                 image: '',
                 phone: '',
                 email: '',
-                leaselength: ''
+                leaselength: '',
+                twitter_handle: '',
+                referrer_name: '',
+                room_price: '',
+                referrer_twitter_url: ''
             })
             onSuccess(); // Call the onSuccess callback
 
