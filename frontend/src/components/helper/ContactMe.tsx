@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
+
+//allows us to detect click outside of contact box and have it disappear when that click happens
 
 export default function ContactMe({
   phone,
@@ -10,7 +12,30 @@ export default function ContactMe({
   twitter_url: string | undefined;
 }) {
   const [showContacts, setShowContacts] = useState(false);
-  console.log("contact me");
+  const clickDetectRef = useRef(null);
+
+  const closeOpenMenus = (e: React.MouseEvent<HTMLButtonElement>) => {
+    console.log(
+      e.target,
+      "detected",
+      showContacts,
+      !clickDetectRef.current?.contains(e.target)
+    );
+    if (!clickDetectRef.current?.contains(e.target)) {
+      setShowContacts(false);
+    }
+  };
+  console.log(showContacts);
+
+  useEffect(() => {
+    // Bind
+    document.addEventListener("mousedown", closeOpenMenus);
+    return () => {
+      // dispose
+      document.removeEventListener("mousedown", closeOpenMenus);
+    };
+  }, []);
+
   function IndividualContactMethod({
     contact_info,
     method_type,
@@ -45,8 +70,8 @@ export default function ContactMe({
             disabled={!contact_info}
             className={
               contact_info
-                ? "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 border border-neutral-200 bg-white hover:bg-neutral-100 hover:text-neutral-900 dark:border-neutral-800 dark:bg-neutral-950 dark:hover:bg-neutral-800 dark:hover:text-neutral-50 h-10 w-10"
-                : "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 dark:ring-offset-neutral-950 dark:focus-visible:ring-neutral-300 bg-neutral-100 text-neutral-900 hover:bg-neutral-100/80 dark:bg-neutral-800 dark:text-neutral-50 dark:hover:bg-neutral-800/80 h-10 w-10"
+                ? "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 border border-neutral-200 bg-white hover:bg-neutral-100 hover:text-neutral-900 h-10 w-10"
+                : "inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-neutral-950 focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50 bg-neutral-100 text-neutral-900 hover:bg-neutral-100/80 h-10 w-10"
             }
           >
             <svg
@@ -71,12 +96,13 @@ export default function ContactMe({
   console.log(twitter_url, email, phone);
   const contactPaneWrapper = () => (
     <div
+      ref={clickDetectRef}
       data-side="bottom"
       data-align="center"
       data-state="open"
       role="dialog"
       id="radix-:rgf:"
-      className="z-50 w-72 rounded-md border border-neutral-200 bg-white p-4 text-neutral-950 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:border-neutral-800 dark:bg-neutral-950 dark:text-neutral-50"
+      className="absolute translate-y-24 z-50 w-72 rounded-md border border-neutral-200 bg-white p-4 text-neutral-950 shadow-md outline-none data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2"
       // style="--radix-popover-content-transform-origin: var(--radix-popper-transform-origin); --radix-popover-content-available-width: var(--radix-popper-available-width); --radix-popover-content-available-height: var(--radix-popper-available-height); --radix-popover-trigger-width: var(--radix-popper-anchor-width); --radix-popover-trigger-height: var(--radix-popper-anchor-height);"
     >
       <div className="flex justify-around">
@@ -89,8 +115,10 @@ export default function ContactMe({
       </div>
     </div>
   );
+  //flex flex-col justify-center w-24
   return (
     <>
+      {/* <div className="flex flex-col justify-center w-24"> */}
       <button
         onClick={() => setShowContacts(!showContacts)}
         aria-haspopup="dialog"
@@ -99,6 +127,7 @@ export default function ContactMe({
         Contact me
       </button>
       {showContacts && contactPaneWrapper()}
+      {/* </div> */}
     </>
   );
 }

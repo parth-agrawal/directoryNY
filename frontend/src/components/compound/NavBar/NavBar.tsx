@@ -22,9 +22,7 @@ export default function NavBar() {
       <div className="mx-auto px-4 py-2 flex justify-between items-center">
         {/* Directory NY logo */}
         <div className="flex-shrink-0 ml-6">
-          <span className="text-xl font-bold text-blue-950 font-serif">
-            DirectoryNY
-          </span>
+          <span className="text-xl font-bold font-serif">DirectoryNY</span>
         </div>
         <div className="flex items-center space-x-4">
           <button
