@@ -3,60 +3,70 @@ import SpaceListingService from "../../lib/services/Space-Listing/service";
 import { UserListingType } from "../../lib/services/User-Listing/types";
 import TwitterIcon from "@mui/icons-material/Twitter";
 import ContactMe from "../helper/ContactMe";
+import { SpaceListing } from "../../lib/services/Space-Listing/types";
+import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
+import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 
 //https://pbs.twimg.com/profile_images/1387824030602780673/CqiWzrma_400x400.jpg
 
-export default function UserListing({
-  UserData,
+export default function SpaceListingCard({
+  SpaceData,
 }: {
-  UserData: UserListingType;
+  SpaceData: SpaceListing;
 }) {
   return (
     <>
-      <div>Placeholder ContactMe</div>
       <div className="p-4 bg-[#FFFDF3] rounded-2xl flex flex-col border-[1px] max-w-1/3 child-inherit-bg">
         <div className="flex items-center justify-between bg-inherit">
           <img
             className="rounded-full w-20 h-20 lg:w-28 lg:h-28 undefined mb-2"
-            alt="User profile image"
+            alt="Space photo"
             src={
               "https://www.shutterstock.com/image-photo/boat-tree-sunset-600nw-1770893537.jpg"
             }
           />
-
           <div className="flex flex-col items-center max-w-[60%] bg-inherit">
             <span className="font-semibold">{"NAME"}</span>
+            <div className="flex gap-4">
+              <div className="flex">
+                {/* <img className="mr-1 " src="src/assets/twopeople.svg"></img> */}
+                <LocationOnOutlinedIcon />
+                <p id="location" className="text-sm md:text-md truncate">
+                  {SpaceData.location}
+                </p>
+              </div>
+              <div className="flex">
+                <PeopleOutlineIcon />
+                <p className="text-sm md:text-md">{SpaceData.housemates}</p>
+              </div>
+            </div>
             {/* twitter handle with icon */}
-            <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2">
-              @{"twitterhandle"}
-              <span className="text-blue-500 ml-0.5 ">
-                <TwitterIcon fontSize="small" />
-              </span>
-            </span>
+
+            <span></span>
             <ContactMe
-              phone={UserData.phone}
-              email={UserData.email}
-              twitter_url={undefined}
+              phone={SpaceData.phone}
+              email={SpaceData.email}
+              twitter_url={SpaceData.twitter_url}
             />
           </div>
         </div>
+        <span className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2">
+          @{"twitterhandle"}
+          <span className="text-blue-500 ml-0.5 ">
+            <TwitterIcon fontSize="small" />
+          </span>
+        </span>
         <div className="flex flex-col">
           <div className=" rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-slate-600">
-            {UserData.description}
+            {SpaceData.description}
           </div>
           {/* <div className="flex flex-row gap-2"> */}
           <div className="text-xs md:text-sm bg-inherit">
             <div className="bg-inherit">
               <span className="text-xs md:text-sm font-semibold mr-1 bg-inherit">
-                Preference
+                Room Price
               </span>
-              <span className="text-xs md:text-sm">{UserData.leaselength}</span>
-            </div>
-            <div>
-              <span className="text-xs md:text-sm font-semibold mr-1 ">
-                Moving
-              </span>{" "}
-              <span className="text-xs md:text-sm">{UserData.moveInTime}</span>
+              <span className="text-xs md:text-sm">{SpaceData.leaselength}</span>
             </div>
             <div>
               <div className="flex flex-row items-center">

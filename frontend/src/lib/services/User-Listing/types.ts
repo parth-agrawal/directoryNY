@@ -14,5 +14,5 @@ export type UserListingType = {
 
 export type UserListingInput = Omit<
   UserListingType,
-  "id" | "createdAt" | "updatedAt"
+  "id" | "createdAt" | "updatedAt" | "user_id"
 >;
