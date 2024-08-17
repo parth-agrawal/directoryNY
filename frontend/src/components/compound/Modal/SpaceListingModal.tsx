@@ -33,18 +33,11 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
         description: "",
         location: "",
         housemates: "",
-        priceRange: "",
         website: "",
         image: "",
         phone: "",
         email: "",
-        twitter_url: "",
-        leaselength: "",
-        twitter_handle: "",
-        referrer_image: "",
-        referrer_name: "",
-        room_price: "",
-        referrer_twitter_url: "",
+        priceRange: "",
     });
 
     const onFilterChange = (field: string, value: string) => {
@@ -81,7 +74,7 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
             onSubmitSuccess();
             onClose();
         } catch (error) {
-            console.error("Error submitting form:", error);
+            console.log("Error submitting form:", error);
         }
 
         onClose();
@@ -163,9 +156,9 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         <label>
                                             <input
                                                 type="radio"
-                                                name={RoomPrice.LessThan1500}
+                                                name="priceRange"
                                                 value={RoomPrice.LessThan1500}
-                                                checked={formData.leaselength === RoomPrice.LessThan1500}
+                                                checked={formData.priceRange === RoomPrice.LessThan1500}
                                                 onChange={handleChange}
                                             />
                                             {RoomPrice.LessThan1500}
@@ -173,9 +166,9 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         <label className="">
                                             <input
                                                 type="radio"
-                                                name="leaselength"
+                                                name="priceRange"
                                                 value={RoomPrice.Between1500And1999}
-                                                checked={formData.leaselength === RoomPrice.Between1500And1999}
+                                                checked={formData.priceRange === RoomPrice.Between1500And1999}
                                                 onChange={handleChange}
                                             />
                                             {RoomPrice.Between1500And1999}
@@ -183,9 +176,9 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         <label className="">
                                             <input
                                                 type="radio"
-                                                name="leaselength"
+                                                name="priceRange"
                                                 value={RoomPrice.Between2000And2499}
-                                                checked={formData.leaselength === RoomPrice.Between2000And2499}
+                                                checked={formData.priceRange === RoomPrice.Between2000And2499}
                                                 onChange={handleChange}
                                             />
                                             {RoomPrice.Between2000And2499}
@@ -193,9 +186,9 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         <label className="">
                                             <input
                                                 type="radio"
-                                                name="leaselength"
+                                                name="priceRange"
                                                 value={RoomPrice.Between2500And3000}
-                                                checked={formData.leaselength === RoomPrice.Between2500And3000}
+                                                checked={formData.priceRange === RoomPrice.Between2500And3000}
                                                 onChange={handleChange}
                                             />
                                             {RoomPrice.Between2500And3000}
@@ -203,9 +196,9 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         <label className="">
                                             <input
                                                 type="radio"
-                                                name="leaselength"
+                                                name="priceRange"
                                                 value={RoomPrice.MoreThan3000}
-                                                checked={formData.leaselength === RoomPrice.MoreThan3000}
+                                                checked={formData.priceRange === RoomPrice.MoreThan3000}
                                                 onChange={handleChange}
                                             />
                                             {RoomPrice.MoreThan3000}
@@ -227,19 +220,6 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                 </section>
                                 <section>
                                     <label className="text-xs text-gray-500">
-                                        Number of housemates
-                                        <input
-                                            name="housemates"
-                                            type="number"
-                                            value={formData.housemates}
-                                            onChange={handleChange}
-                                            className="border p-2 rounded mb-4 w-full text-xs"
-                                            placeholder="0"
-                                        />
-                                    </label>
-                                </section>
-                                <section>
-                                    <label className="text-xs text-gray-500">
                                         Image (optional)
                                         <input
                                             name="image"
@@ -256,11 +236,10 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
                                         Contact phone number (optional)
                                         <input
                                             name="phone"
-                                            type="number"
                                             value={formData.phone}
                                             onChange={handleChange}
                                             className="border p-2 rounded mb-4 w-full text-xs"
-                                            placeholder="0"
+                                            placeholder="+1234567890"
                                         />
                                     </label>
                                 </section>
