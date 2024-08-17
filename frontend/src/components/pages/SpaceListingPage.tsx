@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { CreateSpaceListingArea } from "../compound/CreateSpaceListingArea";
+// import { CreateSpaceListingArea } from "../compound/CreateSpaceListingArea";
 import SpaceListingSection from "./SpaceListingsSection";
 
 export const SpaceListingPage = () => {
@@ -11,7 +11,6 @@ export const SpaceListingPage = () => {
 
   return (
     <>
-      <CreateSpaceListingArea onNewListing={handleNewListing} />
       <SpaceListingSection key={refreshTrigger} />
     </>
   );

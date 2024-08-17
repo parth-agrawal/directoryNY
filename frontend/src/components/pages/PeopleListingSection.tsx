@@ -1,20 +1,9 @@
-//import FilterSection from "../compound/FilterSection";
 import UserListing from "../compound/UserListing";
 import { useCallback, useEffect, useState } from "react";
-// import { UserListingProps, UserListingType } from "../types";
 import { UserListingDisplayData } from "../../lib/services/User-Listing/types";
 import UserListingService from "../../lib/services/User-Listing/service";
 import { LeaseLength, RoommateCount, MovingTimeline } from "./types";
-
-
 import ProfileBanner from "../compound/Banner/ProfileBanner";
-
-// type UserPreference = Pick<
-//   UserListingType,
-//   | "lease_length_preference"
-//   | "lease_timing_preference"
-//   | "lease_roommates_preference"
-// >;
 
 export default function PeopleListingSection() {
   const [userlistings, setuserListings] = useState<Array<UserListingDisplayData>>([]);
@@ -145,8 +134,6 @@ export default function PeopleListingSection() {
   return (
     <>
       <ProfileBanner onListingAdded={handleListingAdded} />
-
-      {/* <div className="flex flex-col gap-4 mb-4"> */}
       <div className="flex flex-row gap-2 grow">
         <div className="flex flex-col gap-2 grow">
           <label
@@ -203,7 +190,7 @@ export default function PeopleListingSection() {
           <div className="font-bold text-2xl pl-2 mt-4">
             {frame[0] as string}
           </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 bg-primary p-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 bg-primary ">
             {userlistings
               .sort((a, b) =>
                 a.createdAt > b.createdAt

@@ -73,7 +73,7 @@ export default function SpaceListingSection() {
     <>
       <SpaceBanner onListingAdded={handleListingAdded} />
       <div className="flex flex-col items-center justify-center">
-        <div className="flex flex-row items-center justify-between w-full">
+        <div className="flex flex-row items-center justify-between w-full my-8 gap-2">
           <SelectFilter
             name="leaseLength"
             options={["Any lease", "Short-term", "Long-term"]}
