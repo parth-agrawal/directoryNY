@@ -40,7 +40,7 @@ export default function SpaceListingSection() {
 
   return (
     <>
-      <SpaceBanner onListingAdded={handleListingAdded} />
+      <SpaceBanner onListingAdded={handleListingAdded} spaceListings={spaceListings} />
       {POSTING_TIME_FRAMES.map((frame) => (
         <>
           {console.log('helloo1', frame[0])}

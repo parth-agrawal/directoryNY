@@ -17,13 +17,16 @@ enum RoomPrice {
 interface SpaceListingModalProps {
     onClose: () => void;
     onSubmitSuccess: () => void;
+    mustEditListing: boolean;
 }
 
 const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
     onClose,
     onSubmitSuccess,
+    mustEditListing,
 }) => {
-
+    const userService = UserService();
+    const [editListingId, setEditListingId] = useState<string | null>(null);
     const [formData, setFormData] = useState<SpaceListingInput>({
         user_id: "",
         name: "",
@@ -37,22 +40,45 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
         priceRange: "",
     });
 
+    useEffect(() => {
+        const fetchUserAndListing = async () => {
+            const userResponse = await userService.getCurrentUser();
+            const user = userResponse.data;
+            if (!user) return;
+
+            const spaceListingService = SpaceListingService();
+            const listingsResponse = await spaceListingService.getAll();
+            const editListingId = listingsResponse.data.find(listing => listing.user_id === user.id);
+
+            if (editListingId && mustEditListing) {
+                setFormData({
+                    user_id: editListingId.user_id,
+                    name: editListingId.name,
+                    description: editListingId.description,
+                    location: editListingId.location,
+                    housemates: editListingId.housemates,
+                    website: editListingId.website || "",
+                    image: editListingId.image || "",
+                    phone: editListingId.phone || "",
+                    email: editListingId.email || "",
+                    priceRange: editListingId.priceRange,
+                });
+                setEditListingId(editListingId.id);
+            } else {
+                setFormData(prevData => ({ ...prevData, user_id: user.id || "" }));
+            }
+        };
+        fetchUserAndListing();
+    }, []);
+
+
+
     const onFilterChange = (field: string, value: string) => {
         setFormData((prevData) => ({ ...prevData, [field]: value }));
     };
 
-    // const userService = useUserService()
-    const userService = UserService();
 
-    useEffect(() => {
-        const fetchUser = async () => {
-            const userResponse = await userService.getCurrentUser();
-            const user = userResponse.data;
-            if (!user) return;
-            setFormData((prevData) => ({ ...prevData, user_id: user.id || "" }));
-        };
-        fetchUser();
-    }, []);
+
 
     const handleChange = (
         e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
@@ -64,9 +90,20 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
         const spaceListingService = SpaceListingService();
+
         try {
-            await spaceListingService.create(formData);
-            console.log("Submitted:", { formData });
+            if (editListingId && mustEditListing) {
+                await spaceListingService.update(
+                    editListingId,
+                    formData
+                );
+                console.log("Updated:", { formData });
+            }
+            else {
+
+                await spaceListingService.create(formData);
+                console.log("Submitted:", { formData });
+            }
             onSubmitSuccess();
             onClose();
         } catch (error) {
