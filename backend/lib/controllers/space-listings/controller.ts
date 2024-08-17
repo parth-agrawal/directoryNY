@@ -33,8 +33,9 @@ router.post("/create", async (req, res) => {
 });
 
 router.put("/:spaceListingId", async (req, res) => {
+    const updatedSpaceListingId = req.params.spaceListingId;
     const updatedSpaceListing = req.body;
-    const spaceListing = await SpaceListingService().updateSpaceListing(updatedSpaceListing);
+    const spaceListing = await SpaceListingService().updateSpaceListing(updatedSpaceListingId, updatedSpaceListing);
     if (spaceListing) {
         res.status(200).json(spaceListing);
     } else {
