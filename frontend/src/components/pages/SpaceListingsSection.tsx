@@ -67,13 +67,6 @@ export default function SpaceListingSection() {
           </div>
         </>
       ))}
-      {spaceListings.map((listing) => (
-        <SpaceListingCard
-          key={listing.id}
-          SpaceData={listing}
-          onListingAdded={handleListingAdded}
-        />
-      ))}
     </>
   );
 }
