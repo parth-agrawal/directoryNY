@@ -17,13 +17,13 @@ enum RoomPrice {
 interface SpaceListingModalProps {
     onClose: () => void;
     onSubmitSuccess: () => void;
-    mustEditListing: boolean;
+    listingExists: boolean;
 }
 
 const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
     onClose,
     onSubmitSuccess,
-    mustEditListing,
+    listingExists,
 }) => {
     const userService = UserService();
     const [editListingId, setEditListingId] = useState<string | null>(null);
@@ -50,7 +50,7 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
             const listingsResponse = await spaceListingService.getAll();
             const editListingId = listingsResponse.data.find(listing => listing.user_id === user.id);
 
-            if (editListingId && mustEditListing) {
+            if (editListingId && listingExists) {
                 setFormData({
                     user_id: editListingId.user_id,
                     name: editListingId.name,
@@ -92,7 +92,7 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
         const spaceListingService = SpaceListingService();
 
         try {
-            if (editListingId && mustEditListing) {
+            if (editListingId && listingExists) {
                 await spaceListingService.update(
                     editListingId,
                     formData

@@ -2,25 +2,36 @@ import { useState } from "react";
 
 import SpaceListingModal from "../Modal/SpaceListingModal";// Adjust the import path
 import { SpaceListing } from "../../../lib/services/Space-Listing/types";
+import UserListingService from "../../../lib/services/User-Listing/service";
+import DeleteListingModal from "../Modal/DeleteListingModal";
 
 interface SpaceBannerProps {
-  onListingAdded: () => void;
+  handleListingsChanged: () => void;
   spaceListings: Array<SpaceListing>;
 }
 
-const SpaceBanner = ({ onListingAdded, spaceListings }: SpaceBannerProps) => {
+const SpaceBanner = ({ handleListingsChanged, spaceListings }: SpaceBannerProps) => {
 
-  const mustEditListing: boolean = spaceListings.length > 0;
+  const listingExists: boolean = spaceListings.length > 0;
 
 
-  const [isModalOpen, setIsModalOpen] = useState(false); // State to manage modal visibility
+  const [isAddEditModalOpen, setAddEditModalOpen] = useState(false); // State to manage modal visibility
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false); // State to manage modal visibility
 
-  const openModal = () => {
-    setIsModalOpen(true); // Function to open the modal
+  const openAddEditModal = () => {
+    setAddEditModalOpen(true); // Function to open the modal
   };
 
-  const closeModal = () => {
-    setIsModalOpen(false); // Function to close the modal
+  const closeAddEditModal = () => {
+    setAddEditModalOpen(false); // Function to close the modal
+  };
+
+  const handleDeleteClick = () => {
+    setDeleteModalOpen(true);
+  };
+
+  const closeDeleteModal = () => {
+    setDeleteModalOpen(false);
   };
 
 
@@ -33,17 +44,36 @@ const SpaceBanner = ({ onListingAdded, spaceListings }: SpaceBannerProps) => {
       <div className="text-sm lg:text-base ">
         Create a profile to be discovered by communities and organizers
       </div>
-      <button
-        className="bg-[#4CAF50] text-xs text-white p-3 rounded-3xl w-fit px-4"
-        onClick={openModal}
-      >
-        {mustEditListing ? "Edit space listing" : "Add space listing"}
-      </button>
-      {isModalOpen && (
+
+      <div className="flex flex-row gap-2">
+        <button
+          className="bg-[#4CAF50] text-xs text-white p-3 rounded-3xl w-fit px-4"
+          onClick={openAddEditModal}
+        >
+          {listingExists ? "Edit space listing" : "Add space listing"}
+        </button>
+        {listingExists && (
+          <button
+            className="bg-red-400 text-xs text-white p-3 rounded-3xl w-fit px-4"
+            onClick={handleDeleteClick}
+          >
+            Delete space listing
+          </button>
+        )}
+      </div>
+      {isAddEditModalOpen && (
         <SpaceListingModal
-          onClose={closeModal}
-          onSubmitSuccess={onListingAdded}
-          mustEditListing={mustEditListing}
+          onClose={closeAddEditModal}
+          onSubmitSuccess={handleListingsChanged}
+          listingExists={listingExists}
+        />
+      )}
+      {isDeleteModalOpen && (
+        <DeleteListingModal
+          onClose={closeDeleteModal}
+          onSubmitSuccess={handleListingsChanged}
+          listingCategory="SpaceListing"
+          listingId={spaceListings[0].id}
         />
       )}
     </div>

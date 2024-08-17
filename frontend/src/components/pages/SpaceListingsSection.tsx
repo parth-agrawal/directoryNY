@@ -21,7 +21,7 @@ export default function SpaceListingSection() {
     fetchListings();
   }, [fetchListings]);
 
-  const handleListingAdded = () => {
+  const handleListingsChanged = () => {
     fetchListings();
   };
 
@@ -40,7 +40,7 @@ export default function SpaceListingSection() {
 
   return (
     <>
-      <SpaceBanner onListingAdded={handleListingAdded} spaceListings={spaceListings} />
+      <SpaceBanner handleListingsChanged={handleListingsChanged} spaceListings={spaceListings} />
       {POSTING_TIME_FRAMES.map((frame) => (
         <>
           {console.log('helloo1', frame[0])}
