@@ -18,7 +18,7 @@ const SpaceBanner = ({ onListingAdded }: SpaceBannerProps) => {
   };
 
   return (
-    <div className="flex flex-col p-4 border border-2 rounded-lg bg-[#F5F8F7] gap-2 mb-2">
+    <div className="flex flex-col p-4 border border-2 rounded-lg bg-bgGreen gap-2 mb-2">
       <div className="text-md lg:text-base font-bold">
         👋 Are you looking for housing?
       </div>

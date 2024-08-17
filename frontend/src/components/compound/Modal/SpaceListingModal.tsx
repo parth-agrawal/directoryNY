@@ -2,8 +2,6 @@ import { useEffect, useState } from "react";
 import { Dialog, DialogBackdrop, DialogPanel } from "@headlessui/react";
 import { SpaceListingInput } from "../../../lib/services/Space-Listing/types";
 import SpaceListingService from "../../../lib/services/Space-Listing/service";
-import { User } from "../../../lib/services/Users/types";
-import { LeaseLength, RoommateCount, MovingTimeline } from "../../pages/types";
 import { UserService } from "../../../lib/services/Users/service";
 import Dropdown from "../Dropdown";
 
@@ -25,7 +23,6 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
     onClose,
     onSubmitSuccess,
 }) => {
-    const [currentUser, setCurrentUser] = useState<User>();
 
     const [formData, setFormData] = useState<SpaceListingInput>({
         user_id: "",
@@ -52,7 +49,6 @@ const SpaceListingModal: React.FC<SpaceListingModalProps> = ({
             const userResponse = await userService.getCurrentUser();
             const user = userResponse.data;
             if (!user) return;
-            setCurrentUser(user);
             setFormData((prevData) => ({ ...prevData, user_id: user.id || "" }));
         };
         fetchUser();

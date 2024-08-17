@@ -40,10 +40,10 @@ export default function SpaceListingSection() {
 
   return (
     <>
-      <SpaceBanner />
-
+      <SpaceBanner onListingAdded={handleListingAdded} />
       {POSTING_TIME_FRAMES.map((frame) => (
         <>
+          {console.log('helloo1', frame[0])}
           <div className="font-bold text-2xl pl-2 mt-4">
             {frame[0] as string}
           </div>
@@ -53,8 +53,8 @@ export default function SpaceListingSection() {
                 a.createdAt > b.createdAt
                   ? 1
                   : b.createdAt > a.createdAt
-                  ? -1
-                  : 0
+                    ? -1
+                    : 0
               )
               .filter(
                 (f) =>
@@ -62,7 +62,10 @@ export default function SpaceListingSection() {
                   new Date(f.createdAt) > frame[2]
               )
               .map((listing) => (
-                <SpaceListingCard key={listing.id} SpaceData={listing} />
+                <>
+                  {console.log('helloo2', listing)}
+                  <SpaceListingCard key={listing.id} SpaceData={listing} />
+                </>
               ))}
           </div>
         </>
