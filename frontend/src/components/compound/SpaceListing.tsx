@@ -76,13 +76,15 @@ export default function SpaceListingCard({
           >
             {SpaceData.description}
           </button>
-          <a
-            className="truncate text-ellipsis overflow-hidden max-w-[70%] hover:text-blue-600" //justify-self-stretch
-            href="https://dev.to/boostup/uncaught-referenceerror-process-is-not-defined-12kg"
-          >
-            https://dev.to/boostup/uncaught-referenceerror-process-is-not-defined-12kg{" "}
-            <OpenInNew fontSize="inherit" />
-          </a>
+          {SpaceData.website && (
+            <a
+              className="truncate text-ellipsis overflow-hidden max-w-[70%] hover:text-blue-600" //justify-self-stretch
+              href={SpaceData.website}
+            >
+              {SpaceData.website}
+              <OpenInNew fontSize="inherit" />
+            </a>
+          )}
         </div>
 
         <div className="text-sm bg-inherit">
