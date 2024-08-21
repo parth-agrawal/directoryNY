@@ -30,6 +30,13 @@ export const SpaceListingService = (): ISpaceListingService => ({
     }));
   },
   createSpaceListing: async (newSpaceListing) => {
+    console.log(newSpaceListing.website);
+    if (newSpaceListing.website) {
+      if (!newSpaceListing.website.startsWith("https://")) {
+        console.log("adding prefix");
+        newSpaceListing.website = "https://" + newSpaceListing.website;
+      }
+    }
     const spaceListing = await prisma.spaceListing.create({
       data: newSpaceListing,
     });
