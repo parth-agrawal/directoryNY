@@ -65,7 +65,7 @@ export default function UserListing({
             <ContactMe
               phone={UserListingData.phone}
               email={UserListingData.email}
-              twitter_url={undefined}
+              twitter_url={`https://twitter.com/${UserListingData.User.twitterHandle}`}
             />
           </div>
         </div>

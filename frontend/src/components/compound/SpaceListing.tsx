@@ -6,9 +6,10 @@ import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import DescriptionBoxPopup from "../helper/DescriptionBox";
 import { useState } from "react";
 import OpenInNew from "@mui/icons-material/OpenInNew";
+import { SpaceListingDisplayData } from "../../lib/services/Space-Listing/types";
 
 interface SpaceListingCardProps {
-  SpaceData: SpaceListing;
+  SpaceData: SpaceListingDisplayData;
   onListingAdded?: () => void;
 }
 
@@ -58,16 +59,21 @@ export default function SpaceListingCard({
             </div>
           </div>
         </div>
-
-        <div className="flex items-center text-blue-500 text-sm mb-4">
-          <span>@{SpaceData.twitter_handle}</span>
-          <TwitterIcon fontSize="small" className="ml-1" />
-        </div>
-
+        <a
+          href={`https://twitter.com/${SpaceData.User.twitterHandle}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex flex-row items-center text-blue-500 text-xs md:text-sm mb-2 hover:underline"
+        >
+          {SpaceData.User.twitterHandle}
+          <span className="text-blue-500 ml-0.5">
+            <TwitterIcon fontSize="small" />
+          </span>
+        </a>
         <ContactMe
           phone={SpaceData.phone}
           email={SpaceData.email}
-          twitter_url={SpaceData.twitter_url}
+          twitter_url={`https://twitter.com/${SpaceData.User.twitterHandle}`}
         />
         <div className="flex flex-col rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-left text-slate-600">
           <button
@@ -96,10 +102,7 @@ export default function SpaceListingCard({
 
         <div className="flex items-center">
           <span className="text-sm font-semibold mr-2">Referred by:</span>
-          <a
-            href={SpaceData.referrer_twitter_url}
-            className="flex items-center"
-          >
+          <a href={""} className="flex items-center">
             <img
               className="rounded-full w-6 h-6 object-cover"
               alt="Referrer profile image"

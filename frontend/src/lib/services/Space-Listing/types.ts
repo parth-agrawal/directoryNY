@@ -1,3 +1,5 @@
+import { User } from "../Users/types";
+
 export type SpaceListing = {
   id: string;
   createdAt: string;
@@ -12,11 +14,19 @@ export type SpaceListing = {
   image?: string;
   phone?: string;
   email?: string;
-  twitter_url?: string;
-  twitter_handle: string;
-  referrer_image?: string;
-  referrer_name: string;
-  referrer_twitter_url: string;
+  // twitter_url?: string;
+  // twitter_handle: string;
+  // referrer_image?: string;
+  // referrer_name: string;
+  // referrer_twitter_url: string;
+};
+
+export type UserWithReferredByUser = User & {
+  referredByUser?: User;
+};
+
+export type SpaceListingDisplayData = SpaceListing & {
+  User: UserWithReferredByUser;
 };
 
 export type SpaceListingInput = Omit<
