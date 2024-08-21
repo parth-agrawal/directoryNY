@@ -6,7 +6,9 @@ import { LeaseLength, RoommateCount, MovingTimeline } from "./types";
 import ProfileBanner from "../compound/Banner/ProfileBanner";
 
 export default function PeopleListingSection() {
-  const [userlistings, setuserListings] = useState<Array<UserListingDisplayData>>([]);
+  const [userlistings, setuserListings] = useState<
+    Array<UserListingDisplayData>
+  >([]);
   const currentDate = new Date();
 
   console.log("people section");
@@ -56,27 +58,6 @@ export default function PeopleListingSection() {
     ["This Month", adj_date(7), adj_date(31)],
     ["Older", adj_date(31), new Date(0)],
   ];
-
-  POSTING_TIME_FRAMES.map((frame) => {
-    userlistings
-      .sort((a, b) =>
-        a.createdAt > b.createdAt ? 1 : b.createdAt > a.createdAt ? -1 : 0
-      )
-      .filter((f) => {
-        console.log(new Date(f.createdAt), frame);
-        console.log(
-          new Date(f.createdAt) <= frame[1],
-          new Date(f.createdAt) > frame[2]
-        );
-        return (
-          new Date(f.createdAt) <= frame[1], new Date(f.createdAt) > frame[2]
-        );
-      })
-      .map((listing) => {
-        console.log("listing", listing);
-        return listing;
-      });
-  });
 
   const SelectFilter = ({
     name,
@@ -156,7 +137,7 @@ export default function PeopleListingSection() {
               defaultval={default_values[1]}
               selected={leaseroommatereference}
               changeHandler={(e) => setLeaseroommatereference(e.target.value)}
-            // defaultval="Any count"
+              // defaultval="Any count"
             />
 
             <div
@@ -179,7 +160,7 @@ export default function PeopleListingSection() {
             selected={leasetimingpreference}
             defaultval={default_values[2]}
             changeHandler={(e) => setLeasetimingpreference(e.target.value)}
-          // defaultval="Any timeline"
+            // defaultval="Any timeline"
           />
         </div>
         {/* </div> */}
@@ -194,10 +175,10 @@ export default function PeopleListingSection() {
             {userlistings
               .sort((a, b) =>
                 a.createdAt > b.createdAt
-                  ? 1
+                  ? -1
                   : b.createdAt > a.createdAt
-                    ? -1
-                    : 0
+                  ? 1
+                  : 0
               )
               .filter(
                 (f) =>
