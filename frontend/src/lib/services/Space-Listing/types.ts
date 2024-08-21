@@ -8,7 +8,6 @@ export type SpaceListing = {
   location: string;
   housemates: string;
   priceRange: string;
-  leaselength: string;
   website?: string;
   image?: string;
   phone?: string;
@@ -30,5 +29,4 @@ export type SpaceListingInput = Omit<
   | "referrer_twitter_url"
   | "twitter_handle"
   | "referrer_name"
-  | "leaselength"
 >;

@@ -5,6 +5,7 @@ import PeopleOutlineIcon from "@mui/icons-material/PeopleOutline";
 import LocationOnOutlinedIcon from "@mui/icons-material/LocationOnOutlined";
 import DescriptionBoxPopup from "../helper/DescriptionBox";
 import { useState } from "react";
+import OpenInNew from "@mui/icons-material/OpenInNew";
 
 interface SpaceListingCardProps {
   SpaceData: SpaceListing;
@@ -24,6 +25,7 @@ export default function SpaceListingCard({
   const closeModal = () => {
     setIsDescriptionOpen(false); // Function to close the modal
   };
+  console.log("SpaceData", SpaceData);
   return (
     <>
       {isDescriptionOpen && (
@@ -67,22 +69,26 @@ export default function SpaceListingCard({
           email={SpaceData.email}
           twitter_url={SpaceData.twitter_url}
         />
-
-        <button
-          onClick={openModal}
-          className="rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-slate-600 line-clamp-3 text-ellipsis pb-[0.14em] text-left"
-        >
-          {SpaceData.description}
-        </button>
+        <div className="flex flex-col rounded-xl text-xs p-2 bg-[#F6F5EB] my-1 text-left text-slate-600">
+          <button
+            onClick={openModal}
+            className="text-left line-clamp-3 text-ellipsis pb-[0.14em] hover:text-slate-500"
+          >
+            {SpaceData.description}
+          </button>
+          <a
+            className="truncate text-ellipsis overflow-hidden max-w-[70%] hover:text-blue-600" //justify-self-stretch
+            href="https://dev.to/boostup/uncaught-referenceerror-process-is-not-defined-12kg"
+          >
+            https://dev.to/boostup/uncaught-referenceerror-process-is-not-defined-12kg{" "}
+            <OpenInNew fontSize="inherit" />
+          </a>
+        </div>
 
         <div className="text-sm bg-inherit">
-          <div className="flex justify-between">
-            <span className="font-semibold">Room Price:</span>
-            <span>{SpaceData.room_price}</span>
-          </div>
-          <div className="flex justify-between">
-            <span className="font-semibold">Lease Length:</span>
-            <span>{SpaceData.leaselength}</span>
+          <div className="flex items-center">
+            <span className="font-semibold mr-2">Room Price:</span>
+            <span>{SpaceData.priceRange}</span>
           </div>
         </div>
 
