@@ -19,11 +19,12 @@ const UnprotectedHomepage = () => {
                 <h1 className=" text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-bold text-center flex flex-col w-4/5 lg:w-3/4 xl:w-3/5">
                     <span >Find sublets, housemates, and coliving communities in the NYC Fractal Scene</span>
                 </h1>
-                <span className="text-center text-black text-md sm:text-lg lg:text-xl">A NY housing directory filled with people and houses we love</span>
+                <span className="text-center text-black text-md sm:text-lg lg:text-xl p-1">A NY housing directory filled with people and houses we love</span>
                 {/* <button onClick={() => navigate("/login/apply")} className="bg-white border-black border-[3px] text-black hover:bg-black/50 hover:text-white font-bold px-12 py-3 rounded-xl text-xl">Apply</button> */}
                 <span className="text-center text-md sm:text-lg lg:text-xl">
                     <SignInButton />
                 </span>
+
 
                 <div className="flex text-center gap-2 bg-pink-200/50 md:gap-4 p-4 md:mt-8 text-sm">
                     <span><span className="text-white font-bold">1412</span> members of DirectorySF</span>
