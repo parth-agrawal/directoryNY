@@ -21,7 +21,7 @@ export default function NavBar() {
     <nav className="top-0 left-0 right-0 bg-primary">
       <div className="mx-auto px-4 py-2 flex justify-between items-center">
         {/* Directory NY logo */}
-        <div className="flex-shrink-0 ml-6">
+        <div className="flex-shrink-0 mx-1 sm:ml-6">
           <span className="text-xl font-bold font-serif">DirectoryNY</span>
         </div>
         <div className="flex items-center space-x-4">
@@ -29,15 +29,15 @@ export default function NavBar() {
             className="px-4 py-2 bg-gray-400 text-white rounded-full hover:bg-black"
             onClick={() => setShowHousingForm(true)}
           >
-            <FontAwesomeIcon icon={faHouse} className="mr-2" />
-            Help Me find housing
+            <FontAwesomeIcon icon={faHouse} className="sm:mr-2" />
+            <span className="hidden sm:inline">Help Me find housing</span>
           </button>
           <button
             className="px-4 py-2 bg-black text-white rounded-full hover:bg-green-600"
             onClick={() => setShowReferralForm(true)}
           >
-            <FontAwesomeIcon icon={faUserPlus} className="mr-2" />
-            Invite a friend
+            <FontAwesomeIcon icon={faUserPlus} className="sm:mr-2" />
+            <span className="hidden sm:inline">Invite a friend</span>
           </button>
           <UserDropdown />
         </div>
