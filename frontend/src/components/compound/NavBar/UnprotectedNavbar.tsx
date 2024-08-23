@@ -62,10 +62,13 @@ const UnprotectedNavbar: React.FC = () => {
     };
 
     return (
-        <nav className="bg-primary flex justify-between items-center px-4 sm:px-10 py-5 border-b border-black border-opacity-10 relative mb-10">
+        <nav className="flex justify-between items-center px-4 sm:px-10 py-5 relative mb-10">
             <div>
-                {/* <img src={ } alt="logo" /> */}
-                solaris
+                <img
+                    src="/fractal.png"
+                    alt="DirectoryNY Logo"
+                    className="h-10 w-auto"
+                />
             </div>
             <div className="md:hidden"> {/* Show hamburger menu on small screens */}
                 <HamburgerMenu />
