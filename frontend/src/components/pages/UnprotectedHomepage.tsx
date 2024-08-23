@@ -1,10 +1,8 @@
 import UnprotectedNavbar from "../compound/NavBar/UnprotectedNavbar";
-import { useNavigate } from "react-router-dom";
 import SignInButton from "../compound/SignInbutton";
 
 
 const UnprotectedHomepage = () => {
-    const navigate = useNavigate();
     return (
         <div className="h-screen">
             <UnprotectedNavbar />
@@ -23,11 +21,12 @@ const UnprotectedHomepage = () => {
                 </h1>
                 <span className="text-center text-black text-md sm:text-lg lg:text-xl p-1">A NY housing directory filled with people and houses we love</span>
                 {/* <button onClick={() => navigate("/login/apply")} className="bg-white border-black border-[3px] text-black hover:bg-black/50 hover:text-white font-bold px-12 py-3 rounded-xl text-xl">Apply</button> */}
-                <span className="text-center text-gray-400 text-md sm:text-lg lg:text-xl">
+                <span className="text-center text-md sm:text-lg lg:text-xl">
                     <SignInButton />
                 </span>
 
-                <div className="flex text-center gap-2 md:gap-4 border border-black rounded-3xl p-4 md:mt-8 text-sm m-4 bg-black text-white ">
+
+                <div className="flex text-center gap-2 bg-pink-200/50 md:gap-4 p-4 md:mt-8 text-sm">
                     <span><span className="text-white font-bold">1412</span> members of DirectorySF</span>
                     <span><span className="text-white font-bold">108</span> listings this month 🌈</span>
                 </div>
