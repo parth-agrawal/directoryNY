@@ -45,9 +45,7 @@ export default function NavBar() {
             <Link to="/spaces" className={getLinkClass("/spaces")}>
               Rooms
             </Link>
-            <Link to="/#" className={getLinkClass("/homes")}>
-              Entire Homes
-            </Link>
+
           </div>
         </div>
       </div>
