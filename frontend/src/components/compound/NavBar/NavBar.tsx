@@ -13,8 +13,8 @@ export default function NavBar() {
 
   const getLinkClass = (path: string) => {
     return location.pathname === path
-      ? "px-4 py-2 text-[#1d462f] bg-[#e7e9d8] border border-[#1d462f] rounded-md" // Active link style
-      : "px-4 py-2 text-[#1d462f] bg-transparent border border-[#1d462f] rounded-md hover:bg-[#e7e9d8]"; // Inactive link style
+      ? "px-4 py-2 rounded-md bg-cover bg-center bg-rainbow border-black border" // Active link style
+      : "px-4 py-2 border border-black rounded-md hover:bg-rainbow hover:bg-cover hover:bg-center"; // Inactive link style
   };
 
   return (
@@ -39,7 +39,10 @@ export default function NavBar() {
       <div className="border-t border-b border-gray-200">
         <div className="mx-auto px-4">
           <div className="flex space-x-4 py-3 px-6">
-            <Link to="/" className={getLinkClass("/")}>
+            <Link
+              to="/"
+              className={`${getLinkClass("/")}`}
+            >
               People
             </Link>
             <Link to="/spaces" className={getLinkClass("/spaces")}>
