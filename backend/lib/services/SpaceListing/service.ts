@@ -30,12 +30,26 @@ export const SpaceListingService = (): ISpaceListingService => ({
     }));
   },
   createSpaceListing: async (newSpaceListing) => {
+    console.log("newSpaceListing.website", newSpaceListing.website);
+    if (newSpaceListing.website) {
+      if (!newSpaceListing.website.startsWith("https://")) {
+        console.log("adding prefix");
+        newSpaceListing.website = "https://" + newSpaceListing.website;
+      }
+    }
     const spaceListing = await prisma.spaceListing.create({
       data: newSpaceListing,
     });
     return spaceListing;
   },
   updateSpaceListing: async (updatedSpaceListingId, updatedSpaceListing) => {
+    console.log("updatespacelisting", updatedSpaceListing.website);
+    if (updatedSpaceListing.website) {
+      if (!updatedSpaceListing.website.startsWith("https://")) {
+        console.log("adding prefix");
+        updatedSpaceListing.website = "https://" + updatedSpaceListing.website;
+      }
+    }
     const spaceListing = await prisma.spaceListing.update({
       where: {
         id: updatedSpaceListingId,

@@ -27,6 +27,14 @@ export default function SpaceListingCard({
     setIsDescriptionOpen(false); // Function to close the modal
   };
   console.log("SpaceData", SpaceData);
+
+  const referredByTwitterHandle =
+    SpaceData.User.referredByUser?.twitterHandle || "@fractaltechnyc";
+  const referredByDisplayName =
+    SpaceData.User.referredByUser?.displayName || "Fractal Tech";
+  const referredByProfilePicture =
+    SpaceData.User.referredByUser?.profilePicture ||
+    "https://pbs.twimg.com/profile_images/1793404102040223744/MlVpqIPY_400x400.png";
   return (
     <>
       {isDescriptionOpen && (
@@ -100,21 +108,25 @@ export default function SpaceListingCard({
           </div>
         </div>
 
-        <div className="flex items-center">
-          <span className="text-sm font-semibold mr-2">Referred by:</span>
-          <a href={""} className="flex items-center">
-            <img
-              className="rounded-full w-6 h-6 object-cover"
-              alt="Referrer profile image"
-              src={
-                SpaceData.referrer_image ||
-                "https://st2.depositphotos.com/2001755/5408/i/450/depositphotos_54081723-stock-photo-beautiful-nature-landscape.jpg"
-              }
-            />
-            <span className="text-blue-500 hover:text-blue-400 ml-2 text-sm">
-              {SpaceData.referrer_name}
+        <div className="flex flex-row items-center">
+          <>
+            <span className="text-xs md:text-sm font-semibold mr-1">
+              Referred by
             </span>
-          </a>
+            <a
+              href={`https://twitter.com/${referredByTwitterHandle}`}
+              className="flex items-center"
+            >
+              <img
+                className="rounded-full w-7 h-7 undefined"
+                alt="Referrer profile image"
+                src={referredByProfilePicture}
+              />
+              <span className="text-blue-500 hover:text-blue-400 m-1 text-xs">
+                {referredByDisplayName}
+              </span>
+            </a>
+          </>
         </div>
       </div>
     </>
