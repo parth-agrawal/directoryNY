@@ -13,8 +13,8 @@ export default function NavBar() {
 
   const getLinkClass = (path: string) => {
     return location.pathname === path
-      ? "px-2 py-1 sm:px-4 sm:py-2rounded-md bg-cover bg-center bg-rainbow border-black border " // Active link style
-      : "px-2 py-1 sm:px-4 sm:py-2border border-black rounded-md hover:bg-rainbow hover:bg-cover hover:bg-center"; // Inactive link style
+      ? "px-2 py-1 sm:px-4 sm:py-2 rounded-md bg-cover bg-center bg-rainbow border-black border " // Active link style
+      : "px-2 py-1 sm:px-4 sm:py-2 border border-black rounded-md hover:bg-rainbow hover:bg-cover hover:bg-center"; // Inactive link style
   };
 
   return (
