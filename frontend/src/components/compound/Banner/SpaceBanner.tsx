@@ -37,7 +37,7 @@ const SpaceBanner = ({ handleListingsChanged, spaceListings }: SpaceBannerProps)
 
 
   return (
-    <div className="flex flex-col p-4 border border-2 rounded-lg bg-bgGreen gap-2 mb-2">
+    <div className="flex flex-col p-4 border border-2 rounded-lg bg-bgGreen gap-2 mb-6">
       <div className="text-md lg:text-lg font-bold">
         🏡 Have a co-living space, sublet, or vacant room?
       </div>
